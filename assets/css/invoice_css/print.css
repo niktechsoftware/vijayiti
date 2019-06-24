@@ -1,0 +1,11 @@
+#hiderow,
+.delete {
+  display: none;
+}
+/* ---------------------------------------------------- BUtton CSS end ----------------------------------------- */
+@media print
+{
+    body * { visibility: visible; }
+    #non-printable { display: none; }
+    #printcontent * { visibility: visible; }
+}
