@@ -14,8 +14,8 @@
 | path to your installation.
 |
 */
-//$config['base_url']	= 'http://vijayiti.org.in/vijayiti/';
-$config['base_url']	= 'http://localhost/vijayiti/';
+$config['base_url']	= 'http://vijayiti.org.in/vijayiti/';
+//$config['base_url']	= 'http://localhost/vijayiti/';
 
 
 /*
