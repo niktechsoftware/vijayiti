@@ -53,6 +53,22 @@
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<!-- start: CORE JAVASCRIPTS  -->
 		<script src="<?php echo base_url(); ?>assets/js/main.js"></script>
+
+		<script>
+			
+
+			 var check = function() {
+                	  if (document.getElementById('password').value ==
+                	    document.getElementById('password_again').value) {
+                	    document.getElementById('cpass').style.color = 'green';
+                	    document.getElementById('cpass').innerHTML = 'matching';
+                	  } 
+                	  else {
+                	    document.getElementById('cpass').style.color = 'red';
+                	    document.getElementById('cpass').innerHTML = 'not matching';
+                	  }
+                	}
+		</script>
 		<!-- end: CORE JAVASCRIPTS  -->
 		<script>
 			jQuery(document).ready(function() {
@@ -78,6 +94,8 @@
 					}
 				});
 
+
+
 				$("#sameMobile").click(function(){
 					if($('#sameMobile:checked').val()?true:false){
 						var addLine1 = $("#mobileNumber").val();
@@ -88,6 +106,8 @@
 						$("#motherMobileNumber").val("");
 					}
 				});
+
+
 
 				$("#classOfAdmission").change(function(){
 					var className = $("#classOfAdmission").val();

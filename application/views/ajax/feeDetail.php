@@ -135,7 +135,7 @@ $fee = $fee1->row();
                                                 "partition-purple"
                                         );
                                     ?>
-                                    <div class="progress form-control" style="width:450px; height:70px;"  >
+                                    <div class="progress form-control" style="width:550px; height:25px;"  >
                                         <input type="hidden" name="fsd" value="<?php echo $fsd; ?>" />
                                         <input type="hidden" name="month" value="<?php echo $month; ?>" />
                                         

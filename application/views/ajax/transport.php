@@ -125,13 +125,14 @@ endif;
 											<table class="table table-striped table-hover" id="sample-table-2">
 												<thead>
 													<tr>
-														<th>S.no.</th>
+														<th>S.No.</th>
 														<th>Enroll Num</th>
 														<th>Student Name</th>
-														<th>Tution_Fee</th>
-														<th>Library_Fee</th>
-														<th>Practical_Fee</th>
-														<th>Examination_Fee</th>
+														<th>Tution Fee</th>
+														<th>Library Fee</th>
+														<th>Practical Fee</th>
+														<th>Examination Fee</th>
+														<th>Other Fee</th>
 														<th>Activity</th>
 														
 													</tr>

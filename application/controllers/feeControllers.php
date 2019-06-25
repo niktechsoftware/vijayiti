@@ -356,6 +356,7 @@ class feeControllers extends CI_Controller{
 				$stu = $stu1->row();
 				$stuname=$stu->name;
 				$mobile = $stu->mobile;
+				
 				$msg = "Dear ".$stuname.",Fee of Month ".date("M",strtotime("$till_date - 1 month")).",is diposited of Rs.".$paid."/-with balance Rs.".$current_balance."/-.For more Contact Ramdoot ITI";
 				sms($mobile,$msg);
 				}

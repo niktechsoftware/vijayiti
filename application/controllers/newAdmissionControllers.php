@@ -57,11 +57,12 @@ $datastudent = array(
 				{
 					$this->load->helper("sms");
 					$f_name=$this->input->post("fatherName");
-					$username = $enroll_num;
+					$username = $enroll_number;
 					$password = $this->input->post("password");
 					$f_mobile = $this->input->post("fatherMobileNumber");
-					
-					sms($authkey,"Dear $f_name Admission is Success in ITI. Your Ward's Student ID= $username and Password=$password. Thanks for Reliance.",$senderiD,$f_mobile);
+				$msg="Dear $f_name Admission is Success in ITI. Your Ward's Student ID= $username and Password=$password. Thanks for Reliance.";
+					// sms($authkey,"Dear $f_name Admission is Success in ITI. Your Ward's Student ID= $username and Password=$password. Thanks for Reliance.",$senderiD,$f_mobile);
+					sms($f_mobile,$msg);
 				}
 					
 					

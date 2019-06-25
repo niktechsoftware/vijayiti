@@ -229,9 +229,9 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label class="control-label">
-												Confirm Password <span class="symbol required"></span>
+												Confirm Password <span class="symbol required" id="cpass"></span>
 											</label>
-											<input type="password"  class="form-control" id="password_again" name="password_again" />
+											<input type="password"  class="form-control" onkeyup='check();' id="password_again" name="password_again" />
 										</div>
 									</div>
 								</div>
