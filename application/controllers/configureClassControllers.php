@@ -23,7 +23,75 @@ function __construct()
 		elseif(!$is_lock){
 			redirect("index.php/homeController/lockPage");
 		}
-	}	
+	}
+
+
+		public function getSectionbyStream()
+		 {
+			$streamid = $this->input->post("streamid");
+			//print_r($streamid);
+			//$stream = $this->input->post("stream");
+			$this->load->model('configureClassModel');
+			$query = $this->configureClassModel->getByClassStream($streamid);
+			if($query->num_rows()>0)
+			{
+           echo   '<option value="">Select Section</option>';
+			foreach ($query->result() as $row)
+			{
+				?>
+				
+					<?php   
+                                $this->db->where('id',$row->section);
+				 	           $row2=$this->db->get('class_section')->row();
+
+                          ?>
+					<option value="<?php echo $row2->id;?>"><?php echo $row2->section;?></option>
+				<?php 
+			}
+		}
+		else
+		{
+                echo "string";
+
+		}
+	}
+
+	 public function getclass()
+		 {
+			$streamid = $this->input->post("streamid");
+			$sectionid = $this->input->post("sectionid");
+			//print_r($streamid);
+			//$stream = $this->input->post("stream");
+			$this->load->model('configureClassModel');
+			$query = $this->configureClassModel->getClassBySectionStream($streamid,$sectionid);
+			if($query->num_rows()>0)
+			{
+           echo   '<option value="">Select Class</option>';
+			foreach ($query->result() as $row)
+			{
+				?>
+					<option value="<?php echo $row->id;?>"><?php echo $row->class_name;?></option>
+				<?php 
+			}
+		}
+		else
+		{
+                echo "string";
+
+		}
+	}
+
+	public function addfsd(){
+		$startdate=$this->input->post('startdate');
+		echo $startdate;
+		$enddate=$this->input->post('enddate');
+		$this->load->model('configureClassModel');
+		$fsdList = $this->configureClassModel->addfsd($startdate,$enddate);
+		//print_r($streamList);
+		$data['showfsd'] = $fsdList->result();
+		$this->load->view("updatefsd",$data);
+	}
+
 	public function addStream(){
 		$this->input->post('streamName');
 		$this->load->model('configureClassModel');
@@ -45,6 +113,47 @@ function __construct()
 		}	
 		
 	}
+
+	public function deletefeecat(){
+		$id=$this->input->post('streamId');
+		//$this->db->where('school_code',$this->session->userdata('school_code'));
+		$this->db->where('id',$id);
+		$delete=$this->db->delete('fee_cat');
+		if($delete){
+		?>
+			<script> 
+
+				
+			        $.post("<?php echo site_url('index.php/configureClassControllers/addfeecategory') ?>", function(data){
+			            $("#streamList1").html(data);
+					});
+			</script>
+			<?php 
+		}
+	}
+	
+
+	public function updatecatforfee(){
+		$this->load->model('configureClassModel');
+		if($query = $this->configureClassModel->updatecat($this->input->post("streamId"),$this->input->post("streamName"))){
+			?>
+			<script>
+			        $.post("<?php echo site_url('index.php/configureClassControllers/addfeecategory') ?>", function(data){
+			            $("#streamList1").html(data);
+					});
+			</script>
+			<?php 
+		}	
+		
+	}
+
+	public function addfeecategory(){
+		$stream=$this->input->post('streamName');
+		$this->load->model('configureClassModel');
+		$streamList = $this->configureClassModel->addfeecategory($stream);
+		$data['streamList'] = $streamList;
+		$this->load->view("ajax/addfeecat",$data);
+	}
 	
 	public function getStream(){
 		$className = $this->input->post("className");
@@ -52,8 +161,11 @@ function __construct()
 		$query = $this->configureClassModel->getStreamByClassName($className);
 		echo '<option value="" >Select Subject Stream</option>';
 			foreach ($query->result() as $row){
+
+				$this->db->where('id',$row->streem);
+				$str=$this->db->get('stream')->row();
 				?>
-					<option value="<?php echo $row->streem; ?>" ><?php echo $row->streem; ?></option>
+					<option value="<?php echo $row->streem; ?>" ><?php echo $str->stream; ?></option>
 				<?php 
 			}
 	}
@@ -104,8 +216,12 @@ function __construct()
 			$query = $this->configureClassModel->getSectionByClassStream($className,$stream);
 			echo '<option value="" >Select Section</option>';
 			foreach ($query->result() as $row){
+
+				$this->db->where('id',$row->section);
+			$sec=	$this->db->get('class_section')->row();
+
 				?>
-					<option value="<?php echo $row->section; ?>" ><?php echo $row->section; ?></option>
+					<option value="<?php echo $row->section; ?>" ><?php echo $sec->section; ?></option>
 				<?php 
 			}
 		}
@@ -139,11 +255,19 @@ function __construct()
 			if(isset($sectionList)){
 				$i = 1;
 				foreach ($sectionList->result() as $row){
+
+					$this->db->where('id',$row->section);
+					$sec=$this->db->get('class_section')->row();
+
+					$this->db->where('id',$row->streem);
+					$str=$this->db->get('stream')->row();
+
+
 					echo '<tr>';
 					echo '<th>'.$i.'</th>';
 					echo '<th>'.$row->class_name.'</th>';
-					echo '<th>'.$row->section.'</th>';
-					echo '<th>'.$row->streem.'</th>';
+					echo '<th>'.$sec->section.'</th>';
+					echo '<th>'.$str->stream.'</th>';
 					echo '</tr>';
 					$i++;
 				}

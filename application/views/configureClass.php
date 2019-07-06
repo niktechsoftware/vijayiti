@@ -78,7 +78,7 @@
 																			
 																		</div>
 																		<div class="alert alert-success">You can <strong>edit </strong> or <strong>delete </strong> stream by press concern Button it sure that you have not created 
-subject and classes depending edited or Deleted Stream.</div>
+                                                                        subject and classes depending edited or Deleted Stream.</div>
 																	</div>
 																</div>
 															</div>
@@ -100,7 +100,7 @@ subject and classes depending edited or Deleted Stream.</div>
 																		</div>
 																		<div class="panel-body">
 																			<div class="text-white text-large">
-																				<input type="text" id="addSection1">
+																				<input type="text" id="addSection1" >
 																				<a href="#" class="btn btn-sm btn-light-red" id="addSectionButton"><i class="fa fa-check"></i> Add Unit</a>
 																			<br>
 																			<br>
@@ -147,7 +147,7 @@ Once a class is created it show in right side panel.<br><br>
 															                      <label for="inputStandard" class="col-lg-4 control-label">Timing<span style="color:#F00">*</span></label>
 															                      <div class="col-lg-7">
 															                       <select class="form-control" id="className" required>
-																                        <option value="">-Select Trade-</option>
+																                        <option value="">-Select Shift-</option>
 																                         <option value="Morning">Morning</option>
 																                     <option value="Evening">Evening</option>
 									                                                 
@@ -162,7 +162,7 @@ Once a class is created it show in right side panel.<br><br>
 																                        <option value="">-Select Trade-</option>
 																                        <?php $var=$this->db->get("stream");
 																                        foreach($var->result() as $v):
-																                        ?><option value="<?php echo $v->stream;?>"><?php echo $v->stream;?></option>
+																                        ?><option value="<?php echo $v->id;?>"><?php echo $v->stream;?></option>
 									                                                  <?php endforeach;?>
 															                        </select>
 															                      </div>
@@ -174,7 +174,7 @@ Once a class is created it show in right side panel.<br><br>
 															                          	<option value="">-Select Unit-</option>
 									                                                     <?php $var=$this->db->get("class_section");
 																                        foreach($var->result() as $c):
-																                        ?><option value="<?php echo $c->section;?>"><?php echo $c->section;?></option>
+																                        ?><option value="<?php echo $c->id;?>"><?php echo $c->section;?></option>
 									                                                  <?php endforeach;?>
 								                                                  	</select>
 															                      </div>

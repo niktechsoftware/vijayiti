@@ -46,22 +46,33 @@
 					<table class="table table-striped table-hover center" id="sample-table-2" style="border:3px solid green;" >
 						<thead class="text-blue text-large" style="border:3px solid green;">
 							<tr>
-								<th style="border:1px solid green;">SNo.</th>
-								<th style="border:1px solid green;">Trade Name</th>
-								<th style="border:1px solid green;">Unit</th>
-								<th style="border:1px solid green;">Shift</th>
-								<th style="border:1px solid green;">Teacher Id</th>
-								<th style="border:1px solid green;">Action</th>
+								<th style="border:1px solid green;"><center>SNo.</center></th>
+								<th style="border:1px solid green;"><center>Trade Name</center></th>
+								<th style="border:1px solid green;"><center>Unit</center></th>
+								<th style="border:1px solid green;"><center>Shift</center></th>
+								<th style="border:1px solid green;"><center>Teacher Id</center></th>
+								<th style="border:1px solid green;"><center>Action</center></th>
 							</tr>
 						</thead>
 						<tbody style="border:3px solid green;">
 							<?php if(isset($classList)): ?>
-							<?php $i = 1; foreach($classList->result() as $row): ?>
+							<?php $i = 1; foreach($classList->result() as $row):
+
+							$this->db->where('id',$row->section);
+							$sec=$this->db->get('class_section')->row();
+
+							$this->db->where('id',$row->streem);
+							$str=$this->db->get('stream')->row();
+
+
+							 ?>
+
+
 							<tr>
 								<td style="border:1px solid green;"><b><?php echo $i; ?></b><input type="hidden" id="id<?php echo $i; ?>" value="<?php echo $row->id; ?>" /></td>
-								<td style="border:1px solid green;"><input type="text" id="stream<?php echo $i; ?>" value="<?php echo $row->streem;?>" size="10"></td>
-								<td style="border:1px solid green;"><input type="text" id="section<?php echo $i; ?>" value="<?php echo $row->section;?>" size="2"></td>
-								<td style="border:1px solid green;"><input type="text" id="clName<?php echo $i; ?>" value="<?php echo $row->class_name;?>"></td>
+								<td style="border:1px solid green;"><input type="text" id="stream<?php echo $i; ?>" readonly value="<?php echo $str->stream;?>" size="20"></td>
+								<td style="border:1px solid green;"><input type="text" id="section<?php echo $i; ?>" readonly value="<?php echo $sec->section;?>"></td>
+								<td style="border:1px solid green;"><input type="text" id="clName<?php echo $i; ?>" readonly value="<?php echo $row->class_name;?>"></td>
 								<td style="border:1px solid green;"><input type="text" id="teacherId<?php echo $i; ?>" value="<?php echo $row->class_teacher_id;?>" size="5"></td>
 								<td style="border:1px solid green;">
 									<button class="btn btn-purple btn-sm" id="editClass<?php echo $i; ?>">

@@ -48,15 +48,15 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'gfincuct_nikiti';
-$db['default']['password'] = 'Rahul!123singh';
-$db['default']['database'] = 'gfincuct_nikiti';
-
 // $db['default']['hostname'] = 'localhost';
-//  $db['default']['username'] = 'root';
-//  $db['default']['password'] = '';
-//  $db['default']['database'] = 'vijayiti';
+// $db['default']['username'] = 'gfincuct_nikiti';
+// $db['default']['password'] = 'Rahul!123singh';
+// $db['default']['database'] = 'gfincuct_nikiti';
+
+$db['default']['hostname'] = 'localhost';
+ $db['default']['username'] = 'root';
+ $db['default']['password'] = '';
+ $db['default']['database'] = 'vijayiti';
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

@@ -305,9 +305,15 @@
 											</label>
 											<select class="form-control" id="section12" name="section">
 											<option> Select Unit</option>
-											<option value="1st">1st</option>
+											<?php $sec = $this->db->query("SELECT DISTINCT section FROM class_section")->result();
+												foreach($sec as $row):?>
+											<!-- <option value="1st">1st</option>
 											<option value="2nd"> 2nd</option>
-											
+											 -->
+										
+											<?php	echo '<option value="'.$row->id.'">'.$row->section.'</option>';
+												endforeach;
+												?>
 
 											</select>
 										</div>
@@ -322,7 +328,7 @@
 												<?php
 												$sub = $this->db->query("SELECT DISTINCT stream FROM stream")->result();
 												foreach($sub as $row):
-												echo '<option value="'.$row->stream.'">'.$row->stream.'</option>';
+												echo '<option value="'.$row->id.'">'.$row->stream.'</option>';
 												endforeach;
 												?>
 											</select>

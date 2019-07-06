@@ -39,13 +39,24 @@
     <a href="<?php echo base_url(); ?>index.php/login"><i class="fa fa-home"></i> <span class="title"> Dashboard </span><span class="label label-default pull-right ">HOME</span> </a>
 </li>
 <li>
-    <a href="javascript:void(0)"><i class="fa fa-desktop"></i> <span class="title"> Configration </span><i class="icon-arrow"></i> </a>
+    <a href="javascript:void(0)"><i class="fa fa-desktop"></i> <span class="title"> Configuration </span><i class="icon-arrow"></i> </a>
     <ul class="sub-menu">
         <li>
             <a href="<?php echo base_url(); ?>index.php/login/configureClass">
                 Configure Trade <i class="icon-arrow"></i>
             </a>
         </li>
+         <li>
+            <a href="<?php echo base_url(); ?>index.php/login/configurefee">
+                Configure Fee <i class="icon-arrow"></i>
+            </a>
+        </li>
+         <li>
+                <a href="<?php echo base_url(); ?>index.php/login/feecategory">
+                Fee Category  <i class="icon-arrow"></i>
+                </a>
+            </li>
+        
         <li>
             <a href="<?php echo base_url(); ?>index.php/login/updateClass">
                 <span class="title"> Update Trade </span>
@@ -54,6 +65,11 @@
         <li>
             <a href="<?php echo base_url(); ?>index.php/login/configureSubject">
                 <span class="title"> Subject Configration  </span>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo base_url(); ?>index.php/login/updatefsd">
+                <span class="title">Update Fsd</span>
             </a>
         </li>
         

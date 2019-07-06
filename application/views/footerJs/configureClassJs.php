@@ -123,6 +123,108 @@
     		$("#classStream").val("");
     		$("#classSection").val("");
         });
+
+         $("#createfsd").click(function(){
+          
+        var startdate = $('#startdate').val();
+         var enddate = $('#enddate').val(); 
+       alert("Your fsd is successfully created");
+
+        $.post("<?php echo site_url('index.php/configureClassControllers/addfsd') ?>", {startdate : startdate,enddate:enddate}, function(data){
+            $("#showfsd").html(data);
+                //alert(data);
+        });
+        $('#startdate').val("");
+         $('#enddate').val("");
+        });
+
+           $("#Applyfsd").click(function(){
+          
+        var fsdid = $('#fsdselect').val();
+       // conformbox('Your want to Apply new fsd');
+        alert("Your fsd is successfully Apply");
+        $.post("<?php echo site_url('index.php/allFormController/updatefsd') ?>", {fsdid : fsdid,}, function(data){
+            $("#showfsd1").html(data);
+                alert(data);
+        });
+        $('#fsdselect').val("");
+        //  $('#enddate').val("");
+        });
+
+
+        $("#clname").change(function(){
+            var clname = $("#clname").val();
+            //alert(clname);
+            $.post("<?php echo site_url('index.php/configureClassControllers/getStream') ?>", {className : clname}, function(data){
+                $("#streamList").html(data);
+                //alert(data);
+            });
+        });
+
+        $("#streamList").change(function(){
+            var clname = $("#clname").val();
+            var stream = $("#streamList").val();
+            //alert(clname);
+            $.post("<?php echo site_url('index.php/configureClassControllers/getSection') ?>", {className : clname, stream : stream}, function(data){
+                $("#section").html(data);
+                //alert(data);
+            });
+        });
+
+        $("#section").change(function(){
+            var clname = $("#clname").val();
+            var stream = $("#streamList").val();
+            var section = $("#section").val();
+            //alert(clname);
+            $.post("<?php echo site_url('index.php/configureFeeController/getfeeheadcategory') ?>", {className : clname, stream : stream, section : section}, function(data){
+                $("#subjectBox").html(data);
+               // alert(data);
+            });
+        });
+
+
+           $("#streamListshow").change(function(){
+                    var streamid = $("#streamListshow").val();
+                
+                  // alert(streamid);
+                    $.post("<?php echo site_url('configureClassControllers/getSectionbyStream') ?>", {streamid : streamid}, function(data){
+                        // alert(data);
+                        $("#sectionshow").html(data);
+
+                       
+                    });
+                });
+
+          $("#sectionshow").change(function(){
+                    
+                    var sectionid = $("#sectionshow").val();
+                     var streamid = $("#streamListshow").val();
+                   // alert(sectionid);
+                     // alert(streamid);
+                    $.post("<?php echo site_url('configureClassControllers/getclass') ?>", {sectionid : sectionid,streamid:streamid}, function(data){
+                        //alert(data);
+                        $("#classshow").html(data);
+                        //  alert(data);
+                    });
+                });
+
+         $("#classshow").change(function(){
+                    var classid = $("#classshow").val();
+                   // var streamid = $("#streamListshow").val();
+                  //  var sectionid = $("#sectionshow").val();
+                  //alert(classid);
+                
+              $.post("<?php echo site_url('configureFeeController/getfeeheadcategory') ?>",{classid : classid}, function(data){
+               alert(data);
+                      $("#subjectBox").html(data);
+                       
+                    });
+                });
+
+
+
+
+           
         
         
         Main.init();

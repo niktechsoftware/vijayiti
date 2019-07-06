@@ -7,6 +7,14 @@ class SubjectModel extends CI_Model{
 		$result = $this->db->get("subject");
 		return $result;
 	}
+		function getSubject1($clName){
+		$this->db->where("class_id",$clName);
+		//$this->db->where("stream",$stream);
+		//$this->db->where("section",$section);
+		$result = $this->db->get("subject");
+		return $result;
+	}
+
 	
 	function getSubjectByClassSection($clName,$section){
 		$this->db->where("class_id",$clName);

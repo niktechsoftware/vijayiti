@@ -43,3 +43,52 @@ class AllFormModel extends CI_Model{
 		return $result;
 	}
 }
+
+
+function updatefsd($fsdid){
+
+    $fsdid1=array(
+
+     'fsd_id' =>$fsdid, 
+
+         );
+//       $this->db->where('fsd',$fsdid);
+//      $result=$this->db->get('class_fees');
+    
+//       if($result->num_rows()>0)
+//         {
+    
+//         }
+//          else 
+//          {
+
+//              $this->db->where('fsd',$this->session->userdata("fsd"));
+//             $result21=$this->db->get('class_fees');
+//              if($result21->num_rows()>0)
+//         {
+//             foreach($result21->result() as $value):
+//         $data=array(
+//             'fsd' =>$fsdid, 
+//             'class_id'=>$value->class_id,
+//             'taken_month'=>$value->taken_month,
+//             'fee_head_name'=>$value->fee_head_name,
+//             'fee_head_amount'=>$value->fee_head_amount,
+//             'update_date'=>date('d-m-y'),
+//          );
+//          $insert=$this->db->insert('class_fees',$data);
+//             endforeach;
+    
+//         }
+//             }
+        
+    
+
+// $this->db->WHERE('school_code', $this->session->userdata("school_code"));
+$result=$this->db->update('general_settings',$fsdid1);
+return $result;
+}
+
+
+        
+    
+?>

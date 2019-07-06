@@ -93,6 +93,58 @@ class Login extends CI_Controller{
 		$data['mainContent'] = 'updateClass';
 		$this->load->view("includes/mainContent", $data);
 	}
+
+	function updatefsd(){
+		$data['pageTitle'] = 'Update fsd';
+		$data['smallTitle'] = 'fsd, And  Class fees ';
+		$data['mainPage'] = 'Update fsd';
+		$data['subPage'] = 'fsd, And  Class fees';
+		$data['title'] = 'Fsd/Class fees';
+		$data['headerCss'] = 'headerCss/configureClassCss';
+		$data['footerJs'] = 'footerJs/configureClassJs';
+		$data['mainContent'] = 'updatefsd';
+		$this->load->view("includes/mainContent", $data);
+	}
+
+		function feecategory(){
+		$data['pageTitle'] = 'Fee Category';
+		$data['smallTitle'] = 'Fee Category ';
+		$data['mainPage'] = 'Fee Category';
+		$data['subPage'] = 'Fee Category';
+		$data['title'] = 'Fee Category';
+		$data['headerCss'] = 'headerCss/configureClassCss';
+		$data['footerJs'] = 'footerJs/configureClassJs';
+		$data['mainContent'] = 'feecategory';
+		 $this->load->model("configureclassmodel");
+		 $this->load->model('configurefeemodel');
+		
+		 $result1 = $this->configureclassmodel->foundClassName();
+		$data['classList'] = $result1->result();
+        $result = $this->configureclassmodel->getStreamList();
+        $data['StreamList'] = $result->result();
+		$this->load->view("includes/mainContent", $data);
+	}
+	
+	
+	function configureFee(){
+		$data['pageTitle'] = 'Configuration';
+		$data['smallTitle'] = 'Fee Date, Fee Head Amount, Discount, Transport And Transport Fees';
+		$data['mainPage'] = 'Configuration';
+		$data['subPage'] = 'Fee Date, Fee Head Amount, Discount, Transport And Transport Fees';
+		$this->load->model('configurefeemodel');
+		
+		$this->load->model("configureClassModel");
+		$result = $this->configureClassModel->foundClassName();
+		$data['classList'] = $result->result();
+		$data['title'] = 'Configure Class/Section';
+		$data['headerCss'] = 'headerCss/configureFeeCss';
+		$data['footerJs'] = 'footerJs/configureFeeJs';
+		$data['mainContent'] = 'configureFeemenu';
+		$this->load->view("includes/mainContent", $data);
+	}
+
+
+
 	
 	function configureSubject(){
 		$data['pageTitle'] = 'Subject Configration';
@@ -104,7 +156,7 @@ class Login extends CI_Controller{
 		$data['footerJs'] = 'footerJs/subjectJs';
 		$data['mainContent'] = 'configureSubject';
 		$this->load->model("configureClassModel");
-		$result = $this->configureClassModel->getClassList();
+		$result = $this->configureClassModel->foundClassName();
 		$data['classList'] = $result->result();
 		$this->load->view("includes/mainContent", $data);
 	}

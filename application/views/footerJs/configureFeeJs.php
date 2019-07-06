@@ -74,8 +74,123 @@
 						}
 					<?php endfor;?>
 				});
-				Main.init();
+
+			
+						   
+			
+                                $("#reset").click(function(){
+            
+            var applymethod = $('#applymethod').val(); 
+           
+        if (confirm("Are you sure that you want to change your fee apply method ...If you click on RESET Button then all Your Fee Head is also Deleted")) {
+        $.post("<?php echo base_url('configureFeeController/resetapply_method') ?>", {applymethod : applymethod}, function(data){
+                $("#demo").html(data);
+                //alert(data);
+            });
+            $('#demo').val("");
+         } 
+
+        });
+
+
+		
+
+  $("#head").change(function(){
+        var post_url = '<?php echo base_url() ?>configureFeeController/apply_method'
+    $.ajax({
+   type: "POST",
+   url: post_url,
+  data : { "hid" : $(this).val() },
+   success: function(response){
+	$.each(response, function(value, key) {
+	 $("#trtrtr").html(data);
+	})
+}
+
+});
+});
+  
+        $("#clname").change(function(){
+            var clname = $("#clname").val();
+            //alert(clname);
+            $.post("<?php echo site_url('index.php/configureClassControllers/getStream') ?>", {className : clname}, function(data){
+                $("#streamList").html(data);
+                //alert(data);
+    		});
+        });
+
+        $("#streamList").change(function(){
+            var clname = $("#clname").val();
+            var stream = $("#streamList").val();
+            //alert(clname);
+            $.post("<?php echo site_url('index.php/configureClassControllers/getSection') ?>", {className : clname, stream : stream}, function(data){
+                $("#section").html(data);
+                //alert(data);
+    		});
+        });
+
+        $("#section").change(function(){
+            var clname = $("#clname").val();
+            var stream = $("#streamList").val();
+            var section = $("#section").val();
+            //alert(clname);
+            $.post("<?php echo site_url('index.php/configureFeeController/getFeeHead') ?>", {className : clname, stream : stream, section : section}, function(data){
+                $("#subjectBox").html(data);
+                //alert(data);
+    		});
+        });
+
+         $("#streamListshow").change(function(){
+    	            var streamid = $("#streamListshow").val();
+    	        
+    	          // alert(streamid);
+    	            $.post("<?php echo site_url('configureClassControllers/getSectionbyStream') ?>", {streamid : streamid}, function(data){
+    	            	// alert(data);
+    	                $("#sectionshow").html(data);
+
+    	               
+    	    		});
+    	        });
+
+          $("#sectionshow").change(function(){
+        			
+     	            var sectionid = $("#sectionshow").val();
+     	             var streamid = $("#streamListshow").val();
+     	           // alert(sectionid);
+     	             // alert(streamid);
+     	            $.post("<?php echo site_url('configureClassControllers/getclass') ?>", {sectionid : sectionid,streamid:streamid}, function(data){
+     	            	//alert(data);
+     	                $("#classshow").html(data);
+     	                //  alert(data);
+     	    		});
+     	        });
+
+           $("#classshow").change(function(){
+    	            var classid = $("#classshow").val();
+    	           // var streamid = $("#streamListshow").val();
+    	          //  var sectionid = $("#sectionshow").val();
+    	          //alert(classid);
+    	        
+    	      $.post("<?php echo site_url('configureFeeController/getFeeHead') ?>",{classid : classid}, function(data){
+    	       //alert(data);
+    	              $("#subjectBox").html(data);
+    	               
+    	    	    });
+    	        });
+
+
+
+
+
+
+
+
+  
+  
+                    		Main.init();
 				SVExamples.init();
 				TableExport.init();
 			});
+		
+
 		</script>

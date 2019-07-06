@@ -26,6 +26,57 @@ class ConfigureClassModel extends CI_Model{
 		$query = $this->db->delete("stream");
 		return $query;
 	}
+
+	public function addfsd($startdate,$enddate){
+		$db = array(
+			"finance_start_date"=> $startdate,
+			"finance_end_date"=>$enddate,
+				//"school_code"=>$this->session->userdata("school_code"),
+		);
+		// if(strlen($startdate)&&strlen($enddate)> 1){
+			
+			$insert=$this->db->insert("fsd",$db);
+			return true;
+		  // }
+		  // else
+		  // {
+
+		  // 	echo "please fill all the field correct!then try again";
+		  // }
+		 
+	}
+
+		// function updatecat($id,$name){
+	
+		//          $data=array(
+  //        'cat_name'=>$name,
+
+		// 				 );
+		// 				//$this->db->where("school_code",$this->session->userdata('school_code'));
+		// 			$this->db->where("id",$id);
+		// 			$result = $this->db->update("fee_cat",$data);
+		// 			return $result;
+		// 	}
+
+		public function addfeecategory($stream){
+		$db = array(
+			"cat_name" => $stream,
+				//"school_code"=>$this->session->userdata("school_code"),
+		);
+		if(strlen($stream) > 1){
+			
+			$this->db->insert("fee_cat",$db);
+		}
+		//$this->db->where("school_code",$this->session->userdata("school_code"));
+		$query = $this->db->get("fee_cat");
+		return $query;
+	}
+
+	public function getStreamList(){
+		//$school_code = $this->session->userdata("school_code");
+		$query = $this->db->query("SELECT DISTINCT streem from class_info ORDER BY id");
+		return $query;
+	}
 	
 	//---------------------------------------- Add Section code Start Here ------------------------------------
 	
@@ -48,6 +99,13 @@ class ConfigureClassModel extends CI_Model{
 		$query = $this->db->update("class_section",$val);
 		return $query;
 	}
+
+		function updatefeecat($data,$rowId){
+//$this->db->where("school_code",$this->session->userdata("school_code"));
+			$this->db->where("id",$rowId);
+			$result = $this->db->update("class_fees",$data);
+			return true;
+	}
 	
 	public function deleteSection($sectionId){
 		$this->db->where("id",$sectionId);
@@ -59,21 +117,27 @@ class ConfigureClassModel extends CI_Model{
 	
 	public function addClass($section){
 		if((strlen($this->input->post("className")) > 0) && (strlen($this->input->post("classStream")) > 0) && (strlen($this->input->post("classSection")) > 0)){
-			$this->db->where("class_name",$section->class_name);
-			$this->db->where("stream",$section->stream);
-			$this->db->where("section",$section->section);
-			$val=$this->db->get(class_info);
+			// $this->db->where("class_name",$section->class_name);
+			// $this->db->where("stream",$section->stream);
+			// $this->db->where("section",$section->section);
+				$this->db->insert("class_info",$section);
+				$val=$this->db->get('class_info');
+			
 			if($val->num_rows()>0){
+
+				// $val=$this->db->get('class_info');
 				
-			}else{
+			 }
+			 else{
 						$this->db->insert("class_info",$section);
-			}
+			 }
 			
 		}
 		$query = $this->db->get("class_info");
 		return $query;
 		
 	}
+
 	
 	public function updateClass($sectionId,$sectionName){
 		$val = array(
@@ -94,6 +158,13 @@ class ConfigureClassModel extends CI_Model{
 		$query = $this->db->query("SELECT * from class_info ORDER BY id");
 		return $query;
 	}
+
+	public function foundClassName(){
+		$query = $this->db->query("SELECT DISTINCT class_name from class_info");
+		return $query;
+	}
+	
+	
 	
 	public function getClassName(){
 		$query = $this->db->query("SELECT DISTINCT class_name from class_info ORDER BY id");
@@ -105,8 +176,19 @@ class ConfigureClassModel extends CI_Model{
 		return $query;
 	}
 	
-	public function getSectionByClassStream($className,$stream){
+	public function getSectionByClassStream($stream){
 		$query = $this->db->query("SELECT DISTINCT section FROM class_info WHERE class_name = '$className' AND streem = '$stream' ");
+		return $query;
+	}
+	public function getByClassStream($stream){
+		$query = $this->db->query("SELECT DISTINCT section FROM class_info WHERE streem = '$stream' ");
+		return $query;
+	}
+
+
+	public function getClassBySectionStream($streamid,$sectionid){
+		//$school_code = $this->session->userdata("school_code");
+		$query = $this->db->query("SELECT * from class_info where section= '$sectionid' AND streem ='$streamid'  ORDER BY id");
 		return $query;
 	}
 	
