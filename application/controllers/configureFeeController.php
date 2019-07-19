@@ -1102,7 +1102,7 @@
         $data1=array(
             'apply_method'=>$hid,
             'apply_cat'=>$lfee,
-            'late_fee'=>$latef,
+            //'late_fee'=>$latef,
            // 'school_code'=>$this->session->userdata('school_code')
             );
         $this->load->model('configurefeemodel');

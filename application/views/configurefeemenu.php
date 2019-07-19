@@ -23,7 +23,7 @@
                
               </ul>
               <div class="tab-content">
-                <div class="tab-pane fade in active" id="myTab_example1">
+                 <div class="tab-pane fade in active" id="myTab_example1">
                     
                                       <div class="panel panel-white ">
                
@@ -44,9 +44,9 @@
                   </div>
                   <div class="panel-body">
 
-                   <?php 	//$this->db->where('school_code',$this->session->userdata('school_code'));
+                   <?php  //$this->db->where('school_code',$this->session->userdata('school_code'));
 
-                                                $row=	$this->db->get('late_fees');
+                                                $row= $this->db->get('late_fees');
                                                 if($row->num_rows()>0)
                                                 {
                                                 $row =$row->row();
@@ -57,9 +57,9 @@
                                            <div class="col-sm-4"><b>Apply Method &nbsp;</b>
                                            <input type="text" id="applymethod" readonly value="<?php echo $mgap;?>">
                                           </div>
-                                          <div class="col-sm-4"><b>Late Fee Amount &nbsp;</b>
+                                         <!--  <div class="col-sm-4"><b>Late Fee Amount &nbsp;</b>
                                            <input type="text" id="feecharge" name="feecharge" value="<?php echo $fee;?>" readonly />
-                                          </div>
+                                          </div> -->
                                           <!--   <div class="col-sm-4">
                                               <button type="reset" id="reset" onClick="Refresh()" value="reset" style="color:white;background-color:blue; height:30px;">Reset</button> 
                                               Reset Your Fee apply Method
@@ -87,9 +87,9 @@
 
                         <?php $ft=4;  $loop  = 12/$mgap ; 
                         for($j = 1 ; $j<= $loop; $j++)
-													{
+                          {
 
-													    ?>
+                              ?>
                         <form action="<?php echo base_url();?>index.php/configureFeeController/update_fee_deposit"
                           method="post" role="form" class="form-horizontal" id="form">
                           <tr>
@@ -98,16 +98,16 @@
                             <?php
                                 if($ft>12){
                                  $ft=$ft-12;}
-																 $month_name = date("F",mktime(0,0,0,$ft,1,date("Y")));
-																	$result =  $this->configurefeemodel->check_fee_deposit($ft);
+                                 $month_name = date("F",mktime(0,0,0,$ft,1,date("Y")));
+                                  $result =  $this->configurefeemodel->check_fee_deposit($ft);
 
-																 if($result->num_rows()>0){
-																 $fd = $result->row();	?>
+                                 if($result->num_rows()>0){
+                                 $fd = $result->row();  ?>
 
                             <td>
-                              <?php	 $month_name1 = date("F",mktime(0,0,0,$fd->month_number,1,date("Y")));
+                              <?php  $month_name1 = date("F",mktime(0,0,0,$fd->month_number,1,date("Y")));
 
-																 	  echo $month_name1; ?>
+                                    echo $month_name1; ?>
                               <input type="hidden" name="month_number" value="<?php echo $fd->month_number;?>">
                             </td>
                             <td> <input type="date" name="dddate" style="font-size: 10pt; height: 34px;"
@@ -117,7 +117,7 @@
                             <td><button type="submit" class="btn btn-primary"> Save
                               </button></td>
                             <?php  }else{
-																 ?>
+                                 ?>
                             <td><?php  echo $month_name ?>
 
                               <input type="hidden" name="month_number" value="<?php echo $ft;?>"></td>
@@ -127,7 +127,7 @@
                             <td><button type="submit" class="btn btn-primary"> Save
                               </button></td>
                             <?php
- 							}   $ft = $mgap+$ft;
+              }   $ft = $mgap+$ft;
 
                                 ?>
 
@@ -160,11 +160,11 @@
                     </div>
                     </div>    
                     <div class="row">
-                    <div class="col-md-4">
+                   <!--  <div class="col-md-4">
                       <h4 style="color:red;"><b>
                       Late Fee Charge Type:</b></h4>
-                    </div>
-                    <div class="col-md-4">
+                    </div> -->
+                   <!--  <div class="col-md-4">
                       <select class="form-control" name="latefee" required>
                         <option value="">--select--</option>
                         <option value="1">Monthly Charge</option>
@@ -172,13 +172,13 @@
                         <option value="0">None</option>
                       </select>
                     </div>
-                   
+                    -->
                     </div>
                     <div class="row">
-                    <div class="col-md-4">
+                   <!--  <div class="col-md-4">
                       <h4 style="color:red;"><b>
                       Late Fee Amount:</b></h4>
-                    </div>
+                    </div> -->
                     <div class="col-sm-4">
                       <input type="text" class="form-control" id="lateamt" name="lateamt" placeholder="Enter Amount" required/>
                     </div>
@@ -192,6 +192,7 @@
                 </div>
                 </div>
                 </div>
+              
                 <div class="tab-pane fade" id="myTab_example2">
 
                 	<div class="row">
@@ -251,8 +252,8 @@
 											</div>
 										</div> -->
 
-<div class="row">
- <div class="col-sm-4">
+      <div class="row">
+              <div class="col-sm-4">
 
                           <div class="panel">
                             <div class="panel-heading btn-dark-green">

@@ -1,26 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+  <title>Fee Invoice</title>
+  <link rel='stylesheet' type='text/css' href='<?php echo base_url(); ?>assets/css/invoice_css/style.css' />
+  <link rel='stylesheet' type='text/css' href='<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css' />
+  <link rel='stylesheet' type='text/css' href='<?php echo base_url(); ?>assets/css/invoice_css/print.css' media="print" />
+  <script type='text/javascript' src='<?php echo base_url(); ?>assets/js/invoice_js/jquery-1.3.2.min.js'></script>
+  <script type='text/javascript' src='<?php echo base_url(); ?>assets/js/invoice_js/example.js'></script>
+  <style type="text/css">
+  @media print
+  {
+      body * { visibility: hidden; }
+      #printcontent * { visibility: visible; }
+      #printcontent { position: absolute; } 
+  }
+  
+  .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+  
+  
+  .button2 {
+  background-color: #008CBA; 
+  color: white; 
+  border: 2px solid #008CBA;
+}
 
-	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-	
-	<title>Fee Invoice</title>
+.button2:hover {
+  background-color: #4CAF50;
+  color: white;
+  border: 2px solid #4CAF50;
+}
 
-	<link rel='stylesheet' type='text/css' href='<?php echo base_url(); ?>assets/css/invoice_css/style.css' />
-	<link rel='stylesheet' type='text/css' href='<?php echo base_url(); ?>assets/css/invoice_css/print.css' media="print" />
-	<script type='text/javascript' src='<?php echo base_url(); ?>assets/js/invoice_js/jquery-1.3.2.min.js'></script>
-	<script type='text/javascript' src='<?php echo base_url(); ?>assets/js/invoice_js/example.js'></script>
-	
-	<style type="text/css">
-
-	@media print
-	{
-			body * { visibility: hidden; }
-			#printcontent * { visibility: visible; }
-			#printcontent { position: absolute; top: 40px; left: 30px; }
-	    }
-	</style>
-	
+  </style>
     <script>
         function convert_number(number)
         {
@@ -28,7 +52,7 @@
             {
                 return "Number is out of range";
             }
-            var Gn = Math.floor(number / 10000000);  /* Crore */
+            var Gn = Math.floor(number / 10000000);  
             number -= Gn * 10000000;
             var kn = Math.floor(number / 100000);     /* lakhs */
             number -= kn * 100000;
@@ -93,213 +117,251 @@
 </head>
 
 <body>
-	<div id="printcontent">
-	<div id="page-wrap" style="border:1px solid #333;">
-<?php 
-	$school_info = mysql_query("select * from general_settings");
-	$info = mysql_fetch_object($school_info);
-?>		
-		<table style="width: 100%">
-			<tr>
-				<td width="10%" style="border: none;">
-					<img src="<?php echo base_url();?>assets/images/empImage/<?php echo $this->session->userdata("logo");?>" alt="" width="100" />
-				</td>
-				<td style="border: none;">
-					<h1 align="center" style="text-transform:uppercase;"><?php echo $info->your_school_name; ?></h1>
-			        <h3 align="center" style="font-variant:small-caps;">
-						<?php echo $info->address_1." ".$info->address_2." ".$info->city; ?>
-			        </h3>
-			        <h3 align="center" style="font-variant:small-caps;">
-						<?php echo $info->state." - ".$info->pin; ?>
-			        </h3>
-			        <h3 align="center" style="font-variant:small-caps;">
-						<?php if(strlen($info->phone_number > 0 )){echo "Phone : ".$info->phone_number.", ";} ?>
-			            <?php echo "Mobile : ".$info->mobile_number; ?>
-			        </h3>
-				</td>
-			</tr>
-		</table>
-		
-        
-		<div style="clear:both"></div>
-		
-		<div id="customer">
-        	<div style="display:inline-block;">
-            <table> 
-                    <tr>
-                    	<td style="border:none; line-height: 8px;">
-                    		Student Name : <strong><?php echo $rowc->name; ?></strong>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td style="border:none; line-height: 8px;">
-                    		Fathers Name : <strong><?php echo $rowc->father_full_name; ?></strong>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td style="border:none; line-height: 8px;">
-                        	<?php echo 'Class : <strong>'.$rowc->trade.' - '.$rowc->unit.' - '.$rowc->shift.'</strong>';	?>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td style="border:none; line-height: 8px;">
-                        	<?php echo 'Address : <strong>'.$rowc->address1.' '.$rowc->address2.' '.$rowc->city.' - '.$rowc->pin_code.'</strong>';	?>
-                        </td>
-                    </tr>
-            </table>
-			</div>
-            <div style="display:inline-block; float:right; margin-right:5px;">
-            <table>
-                <tr>
-                    <td class="meta-head" style="line-height: 8px;">Reciept No.</td>
-                    <td style="line-height: 8px;"><?php echo $rowb->invoice_no; ?></td>
-                </tr>
-                <tr>
-                    <td class="meta-head" style="line-height: 8px;">
-                    	<?php echo 'Student ID :'; ?>
-                    </td>
-                    <td style="line-height: 8px;"><?php echo $rowc->enroll_num; $id = $rowc->enroll_num; ?></td>
-                </tr>
-                <tr>
-                    <td class="meta-head" style="line-height: 8px;">Payment Mode</td>
-                    <td style="line-height: 8px;"><?php echo $rowb->payment_mode; ?></td>
-                </tr>
-                <tr>
-                    <td class="meta-head" style="line-height: 8px;">Number Of Month</td>
-                    <td style="line-height: 8px;">
-                    	<script> document.write(convert_number(<?php echo $rowb->diposit_month; ?>)); </script>
-					</td>
-                </tr>
-                <tr>
-                    <td class="meta-head" style="line-height: 8px;">Diposit Date</td>
-                    <td style="line-height: 8px;">
-                    	<?php 
-							echo date("d-M-y", strtotime($rowb->diposit_date));
-						?>
-					</td>
-                </tr>
-                <tr>
-                    <td class="meta-head" style="line-height: 8px;">Fee of Month</td>
-                    <td style="line-height: 8px;">
-                    	<?php 
-                    		$sno = $rowb->id;
-                    		$c = $this->db->query("SELECT * FROM `fee_deposit` WHERE student_id='$id' AND id < '$sno' ORDER BY id DESC LIMIT 1");
-                    		if($c->num_rows() > 0){
-	                    		$last = $c->row();
-	                    		$month = $last->till_diposit;
-	                    		for($k = 0; $k < $rowb->diposit_month;$k++){
-									echo date("M-Y", strtotime("$month + $k month"));
-									if($k != $rowb->diposit_month){
-										echo ",";
-									}
-	                    		}
-                    		}else{
-                    			echo date("M-Y", strtotime($rowb->finance_start_date));
-                    		}
-						?>
-					</td>
-                </tr>
-            </table>
-            </div>
-		
-		</div>
-		<table id="items" align="center" style="width:95%; margin-top:0px; alignment-adjust:central; margin-left:2.5%;">
-		  <tr>
-		       <th width="5%">No.</th>
-               <th width="75%">Fee Name</th>
-               <th width="20%">Fee Amount</th>
-		  </tr>
-		  <?php if($isAdmission == "true"): ?>
-		  		<tr>
-		  			<td colspan="3" align="center">Admission Fee Detail</td>
-		  		</tr>
-		  		<?php $i = 1;?>
-		  		<?php $oneTime = $this->db->list_fields("one_time_fee");?>
-		  		<?php foreach ($oneTime as $otf):?>
-		  		<?php if($otf != "id" && $otf != "student_id" && $otf != "diposit_date"):?>
-		  		<tr>
-		  			<?php $temp = str_replace("_", " ", $otf)?>
-		  			<?php $name = ucwords($temp);?>
-		  			<td><?php echo $i;?></td>
-		  			<td><?php echo $name; ?></td>
-		  			<td><?php echo $one_time_fee->$otf;?></td>
-		  		</tr>
-		  		<?php $i++;?>
-		  		<?php endif;?>
-		  		<?php endforeach;?>
-		  		<tr>
-		  			<td colspan="3"><hr/></td>
-		  		</tr>
-		  <?php endif;?>
-		<?php 
-			$i = 1;
-			$fields1 = $this->db->list_fields('fee_deposit');
-			foreach($fields1 as $fields):
-				if($fields != "id" && $fields != 'student_id' && $fields != "payment_mode" && $fields != "previous_balance" && $fields != "total" && $fields != "paid" && $fields != "other_fee_reason" && $fields != "current_balance" && $fields != "sub_total" && $fields != "diposit_month" && $fields != "diposit_date" && $fields != "till_diposit" && $fields != "invoice_no" && $fields != "finance_start_date"):
-				$abc = str_replace("_"," ","$fields");
-				$name = ucwords($abc);
-		?>
-		  <tr class="item-row">
-		      <td style="line-height: 8px;"><?php echo $i; ?></td>
-		      <td style="line-height: 8px;"><?php   if($fields == "Previous Stock Balance"){ echo "Remain Admission";}else{ echo $name;} if(($fields == "Others_Fee") && ($rowb->Others_Fee > 0)){ echo " (".$rowb->other_fee_reason.")";} ?></td>
-		      <td style="line-height: 8px;">
-		      	<?php echo $rowb->$fields; ?></td>
-		  </tr>
-<?php $i++; endif; endforeach; ?>		  
-		  
-          <tr>
-          	  <td colspan="2" rowspan="4" align="right">
-          	  		<table style="width:100%">
-          	  			<tr>
-          	  				<td rowspan="4" style="width: 75%;padding: 5px;" valign="bottom">
-          	  					<table>
-          	  						<tr>
-          	  							<td style="border:0px;"><strong>Recieved by : </strong></td>
-          	  							<td style="border:0px;"><?php echo $reciever_name; ?></td>
-          	  							<td style="border:0px;" width="10"></td>
-          	  							<td style="border:0px;"><strong>Paid By : </strong></td>
-          	  							<td style="border:0px;"><?php echo $fee_bank_detail->depositor_name; ?></td>
-          	  						</tr>
-          	  					</table>
-          	  					<strong>Paid Amount in Words : </strong><script> document.write(convert_number(<?php echo $rowb->paid; ?>)); </script> Only /-
-          	  					<br/>
-          	  					<br/>
-          	  					This is computer generated copy it not require any signature or stamp...
-          	  				</td>
-          	  				<td align="right"><strong>Previous Balance</strong></td>
-          	  			</tr>
-          	  			<tr>
-          	  				<td align="right"><strong>Total</strong></td>
-          	  			</tr>
-          	  			<tr>
-          	  				<td align="right"><strong>Amount Paid</strong></td>
-          	  			</tr>
-          	  			<tr>
-          	  				<td align="right"><strong>Balance Due</strong></td>
-          	  			</tr>
-          	  		</table>
-          	  </td>
-		      <td><?php echo $rowb->previous_balance; ?></td>
-		  </tr>
-		  <tr>
-		      <td><?php echo $rowb->total; ?></td>
-		  </tr>
-          <tr>
-		      <td><?php echo $rowb->paid; ?></td>
-		  </tr>
-          <tr>
-		      <td><?php echo $rowb->current_balance; ?></td>
-		  </tr>		
-		</table>
-	</div>
-	</div>
-	<br/><br/>
-	<div class="invoice-buttons">
-    	<button class="btn btn-default margin-right" type="button" onclick="window.print();" >
-        	<i class="fa fa-print padding-right-sm"></i> Print Reciept
-        </button>
-    </div>
     
-</body>
 
+<?php //else{?>
+      <div id="printcontent" style="width:100%;">
+      <h3 class="text-danger text-center text-uppercase">Student Reciept</h3>
+  <div id="page-wrap" style="border:1px solid #333; width: 95%; margin: 0 auto;">
+<?php 
+$tdiscount=0;
+//$school_code=$this->session->userdata("school_code");
+  //$this->db->where("id",$school_code);
+  $info =$this->db->get("general_settings")->row();
+
+  $sid=$this->uri->segment(4);
+  $this->db->where("s_no",$sid);
+  $rowc =$this->db->get("student_info")->row();
+  
+  $this->db->where("id",$rowc->class_id);
+    //$this->db->where("school_code",$school_code);
+  $classname =$this->db->get("class_info")->row();
+?>
+<div style="margin:5px;">
+    <table style="width: 100%; border:1px solid black; ">
+    <tbody>
+    <tr style="background-color:#a1d657" class='text-uppercase'>
+       
+        <td style="border: none; text-align:center;">
+          <span style="text-transform:uppercase; margin-top:0; margin-bottom:0; font-size:15px;"><b><?php echo $info->your_school_name; ?></b></span><br>
+              <span style="font-variant:small-caps; margin-top:0; margin-bottom:0; font-size:12px"><?php echo $info->address_1." ,".$info->city; ?></span>
+              <span style="font-variant:small-caps; margin-top:0; margin-bottom:0;font-size:12px">,<?php echo $info->state." - ".$info->pin; ?></span><br>
+               <?php if(strlen($info->fax_number > 0 )){ $mno=$info->fax_number;}else{ $mno=" ";}?>
+              <span style="font-variant:small-caps; margin-top:0; margin-bottom:0;font-size:12px"><?php if(strlen($info->mobile_number > 0 )){echo "Mobile Number : ".$info->mobile_number.",".$mno ;}else{echo N/A;} ?>
+                 </span>
+        </td>
+       
+      </tr>
+      </tbody>
+    </table>
+    </div>
+    <hr style="margin-top:5px; margin-bottom:0;">
+    <div style="clear:both"></div>
+    <div id="customer" style="margin:7px;">
+          <div style="display:inline-block; background-color:#e5952d;">
+            <table> 
+                    <tbody style="">
+          <tr class='text-uppercase'>
+                      <td class="meta-head" style="padding:5px; font-size:12px;">
+            <b>Student Name</b>
+            <td style="padding:5px; font-size:12px;"><?php echo $rowc->name; ?></td>
+                        </td>
+                    </tr>
+                    <tr class='text-uppercase'>
+                      <td class="meta-head" style="padding:5px; font-size:12px;">
+            <strong>Fathers Name</strong><td style="padding:5px; font-size:12px;"> <?php echo $pInfo->father_full_name; ?></td>
+                        </td>
+                    </tr>
+          <tr class='text-uppercase'><?php $this->db->where('id',$classname->section);
+          $section=$this->db->get('class_section')->row();
+          ?>
+                      <td class="meta-head" style="padding:5px; font-size:12px;">
+            <strong>Class & Section </strong><td style="padding:5px; font-size:12px;"><?php echo $classname->class_name ;?> & <?php echo $section->section ;?> 
+            </td></td>
+                    </tr>
+                    <tr class='text-uppercase'>
+                      <td class="meta-head" style="padding:5px; font-size:12px;">
+            <strong>  Address  </strong>  <td style="padding:5px; font-size:12px;"><?php echo $rowc->address1.' '.$rowc->city.' - '.$rowc->pin_code;  ?></td>
+            </td>
+                    </tr>
+                    </tbody>
+      </table>
+      </div>
+          
+            <div style="display:inline-block; background-color:#e5952d">
+            <table style="width:500px">
+                <tbody>
+        <tr class='text-uppercase'>
+                    <td class="meta-head" style="padding: 0 5px 0 5px; font-size:12px;"><b>Reciept No</b></td>
+                    <td style="padding: 0 5px 0 5px; font-size:12px;"><?php echo $rowb->invoice_no; ?></td>
+                </tr>
+                <tr class='text-uppercase'>
+                    <td class="meta-head" style="padding: 0 5px 0 5px; font-size:12px;"> <b>Student ID </b></td>
+                    <td style="padding: 0 5px 0 5px; font-size:12px;" ><?php echo $rowc->enroll_num; $id = $rowc->s_no; ?></td>
+                </tr>
+               <tr class='text-uppercase'>
+                    <td class="meta-head" style="padding: 0 5px 0 5px; font-size:12px;"> <b>Payment Mode </b></td>
+                     <td style="padding: 0 5px 0 5px; font-size:12px;"><?php if($rowb->payment_mode=="1"){echo "Cash Payment";}elseif($rowb->payment_mode=="2"){ echo "Online Transfer";}elseif($rowb->payment_mode=="3"){ echo "Bank Challan";}elseif($rowb->payment_mode=="4"){ echo "Cheque";}elseif($rowb->payment_mode=="5"){ echo "Swap Machine";}else{ echo "Cash Payment";} ?></td>
+                </tr>
+        <?php //$this->db->where('school_code',$school_code);
+         $applymonth=$this->db->get("late_fees")->row()->apply_method;
+        ?>
+                <tr class='text-uppercase'>
+                    <td class="meta-head"  style="padding: 0 5px 0 5px; font-size:12px;"> <b>Number Of Month </b></td>
+                    <td style="padding: 0 5px 0 5px; font-size:12px;">
+
+                      <script> document.write(convert_number(<?php echo ($rowb->deposite_month)*($applymonth); ?>)); </script>
+
+          </td>
+                </tr>
+                <?php 
+               if($this->uri->segment(5)>0){
+        $fsd_id = $this->uri->segment(5);
+          }else{
+          $fsd_id=$this->session->userdata('fsd');
+        }
+        //$this->db->where("school_code",$school_code);
+        $this->db->where("id",$fsd_id);
+         $fsddate=$this->db->get("fsd")->row()->finance_start_date;?>
+                <tr class='text-uppercase'>
+                    <td class="meta-head" style="padding: 0 5px 0 5px; font-size:12px;"> <b>Deposite Date </b></td>
+                    <td style="padding: 0 5px 0 5px; font-size:12px;">
+                      <?php 
+                      echo date("d-M-y",  strtotime($rowb->diposit_date));
+            ?>          </td>
+                </tr>
+                <tr class='text-uppercase'>
+                     <td class="meta-head" style="padding: 0 5px 0 5px; font-size:12px;"> <b>Fee of Month </b></td>
+                    <td style="padding: 0 5px 0 5px; font-size:12px;">
+
+                      <?php 
+                        $this->db->where("invoice_no",$rowb->invoice_no);
+                      //$this->db->where("school_code",$this->session->userdata("school_code"));
+          $rty =  $this->db->get("deposite_months");
+          $monthmk=array();
+          $demont = $rty->num_rows();
+                   $i=0; foreach($rty->result() as $tyu):
+                       if($tyu->deposite_month<4){
+                         $ffffu=  $tyu->deposite_month-4+12;
+                    
+                       }else{
+                        $ffffu= $tyu->deposite_month-4;}
+          
+            echo  date('M-Y', strtotime("$ffffu months", strtotime($fsddate))).", ";
+            $monthmk[$i]=$tyu->deposite_month;
+                      //echo date("d-M-y", $rdt);
+          $i++; endforeach;           
+$monthmk[$i]=13;?>
+                </td></tr>
+            </tbody></table>
+            </div>
+    
+    </div>
+    <div style="margin:5px;">
+    <table id="items" style="margin: 5px 0 0 0;">
+      <tbody style=" background-color:#ffff99">
+          <tr class='text-uppercase'>
+                <td colspan="3" align="center" style="background-color:green; color:white;" ><b>Admission Fee Detail</b></td>
+          </tr>
+      <tr class='text-uppercase'>
+           <th class="col-sm-1 text-center">No.</th>
+               <th class="col-sm-8">Fee Name</th>
+               <th class="col-sm-3 text-center">Fee Amount</th>
+      </tr>
+  
+          <?php 
+          $this->db->where("s_no",$rowc->s_no);
+          $stuid_details = $this->db->get("student_info")->row();
+          $feecata[0] = $rowb->feecat;
+          $feecata[1]=0;
+          $this->db->distinct();
+          $this->db->select("*"); 
+          $this->db->where_in("cat_id",$feecata);
+          $this->db->where_in('taken_month',$monthmk);
+           $this->db->where('fsd',$rowb->finance_start_date);
+          $this->db->where("class_id",$stuid_details->class_id);
+          $fee_head = $this->db->get("class_fees");
+          $total=0;
+          if($fee_head->num_rows()>0)
+          { $i=1;
+                    
+              foreach($fee_head->result() as $feeh):
+              
+              if($feeh->fee_head_name!= NULL){?>                      
+          <tr class='text-uppercase'>
+          <td class="col-sm-1 text-center"><b> <?php echo $i;?></b></td>
+          <td class="col-sm-8"><b><?php echo $feeh->fee_head_name;?></b></td>
+          <td class="col-sm-3 text-center"><?php  if($feeh->taken_month==13){ $total+=$feeh->fee_head_amount*$demont; echo $feeh->fee_head_amount*$demont;}else{ $total+=$feeh->fee_head_amount; echo $feeh->fee_head_amount;}?></td>
+          </tr>
+          <?php $i++; }
+           endforeach;}?>
+                                
+        
+
+             <tr class='text-uppercase'>
+              <td class="col-sm-1 text-center"><b><?php echo $i;?></b></td>
+          <td class="col-sm-8"><b><?php echo "LATE FEE"; ?></b></td>
+          <td class="col-sm-3  text-center"><?php echo $lfee=$rowb->late; $i++;?></td>
+        </tr>
+         <?php  $this->db->where("student_id",$rowb->student_id);
+      $this->db->where("invoice_no",$rowb->invoice_no);
+      $this->db->where("school_code",$rowb->school_code);
+      $mbalance=$this->db->get('feedue');
+      ?> 
+        <tr class='text-uppercase'>
+              <td class="col-sm-1 text-center"><b><?php echo $i;?></b></td>
+          <td class="col-sm-8"><b><?php echo "PREVIOUS MONTH BALANCE"; ?></b></td>
+          <td class="col-sm-3 text-center"><?php  echo $prbalanace=$rowb->previous_balance; $i++;?></td>
+        </tr> 
+        <!--<hr style="margin-top:5px; margin-bottom:0;">-->
+        
+        </tbody>
+          </table>
+
+          <table style="width:100%; margin-top:2px; background-color:#4286f4">
+      
+          <tr class='text-uppercase'>
+          <?php $this->db->where("student_id",$rowb->student_id);
+      $this->db->where("invoice_no",$rowb->invoice_no);
+     // $this->db->where("school_code",$rowb->school_code);
+      $mbalance=$this->db->get('feedue');
+      
+       // $this->db->where('id',$school_code);
+      $schoolname=$this->db->get('general_settings')->row()->your_school_name;
+      ?>
+          <td class="col-sm-7" rowspan="3" style="color:white;" >
+          <strong>   Recieved by :</strong><?php echo $schoolname; ?> &nbsp <strong>Paid By :</strong> <?php echo $rowc->enroll_num;?><br>
+          <strong>Paid Amount in Words : </strong><script> document.write(convert_number(<?php echo $rowb->paid; ?>)); </script> Only /-<br>
+This is computer generated copy it not require any signature or stamp.
+          
+          </td>
+        
+          <td class="col-sm-2 text-center"  style="background-color:#caf441" > <strong>Total</strong> </td>
+          <td class="col-sm-3 text-center"  style="background-color:#caf441"   ><?php echo sprintf('%0.2f',$total+$lfee+$prbalanace); ?> </td>
+          </tr>
+        
+          <tr class='text-uppercase'>
+          <td class="text-center text-nowrap"  style="background-color:#caf441" > <strong>Amount Paid</strong></td>
+          <td class="text-center" style="background-color:#caf441" ><?php echo $rowb->paid; ?></td>
+          </tr>
+          <tr class='text-uppercase'>
+          <td class="text-center text-nowrap"  style="background-color:#caf441" ><strong>Balance Due</strong></td>
+          
+          <td class="text-center"  style="background-color:#caf441" ><?php if($mbalance->num_rows()>0) { echo sprintf('%0.2f',$mbalance->row()->mbalance);}else{ echo '0.00';} ?></td>
+          </tr>
+          </table>
+  
+    </div>
+  </div>
+  </div>
+</div>
+    <?php //} ?>
+</body><div class="invoice-buttons" style="text-align:center;">
+ 
+ <button class="button button2" type="button"  onclick="window.print();">
+     Print Reciept
+    </button>  
+  </div>
+
+<!--  -->
 </html>

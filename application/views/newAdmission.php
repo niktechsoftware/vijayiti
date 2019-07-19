@@ -303,19 +303,25 @@
 											<label class="control-label">
 												Unit <span class="symbol required"></span>
 											</label>
-											<select class="form-control" id="section12" name="section">
-											<option> Select Unit</option>
-											<?php $sec = $this->db->query("SELECT DISTINCT section FROM class_section")->result();
-												foreach($sec as $row):?>
-											<!-- <option value="1st">1st</option>
-											<option value="2nd"> 2nd</option>
-											 -->
-										
-											<?php	echo '<option value="'.$row->id.'">'.$row->section.'</option>';
-												endforeach;
-												?>
+											 <select id="streamListshow" class="form-control">
+                                  <option value="">Select Stream Name</option>
+                                  <?php
+                                          $this->load->model("configurefeemodel");
+                                        $result = $this->configurefeemodel->getStreamList();
+                                        $streamList = $result->result();
+                                        if(isset($streamList)):?>
+                                  <?php foreach ($streamList as $row):?>
+                                  <?php //$this->db->where("school_code",$this->session->userdata("school_code"));
+                                                                    $this->db->where('id',$row->streem);
+                                                          $row1=$this->db->get('stream');
+                                                          if($row1->num_rows()>0){
+                                                              $row2 =$row1->row();
+                                                                    ?>
 
-											</select>
+                                  <option value="<?php echo $row2->id;?>">
+                                    <?php echo $row2->stream;?></option>
+                                  <?php } endforeach; endif;?>
+                                </select>
 										</div>
 									</div>
 									<div class="col-md-3">
@@ -323,15 +329,21 @@
 											<label class="control-label">
 												Trade <span class="symbol required"></span>
 											</label>
-											<select class="form-control" id="stream" name="stream">
-												<option> Select Trade</option>
-												<?php
-												$sub = $this->db->query("SELECT DISTINCT stream FROM stream")->result();
-												foreach($sub as $row):
-												echo '<option value="'.$row->id.'">'.$row->stream.'</option>';
-												endforeach;
-												?>
-											</select>
+											 <select id="sectionshow" class="form-control">
+
+                                			</select>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="control-label">
+												Class <span class="symbol required"></span>
+											</label>
+											  <select id="classshow" class="form-control" name="classshow">
+
+
+                             				   </select>
 										</div>
 									</div>
 								</div>

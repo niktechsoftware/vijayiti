@@ -4,7 +4,10 @@
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-1.11.1.min.js"></script>
 			<![endif]-->
 			<!--[if gte IE 9]><!-->
-			
+				<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.1.1.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/plugins/excanvas.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-1.11.1.min.js"></script>
+		
 			<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.1.1.min.js"></script>
 			<!--<![endif]-->
 			<script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
@@ -61,11 +64,20 @@
 		<!-- end: CORE JAVASCRIPTS  -->
 		<script>
 			jQuery(document).ready(function() {
-				 $("#sonu").hide();
+				//  $("#sonu").hide();
+				// $("#studid").keyup(function(){
+				// 	var teacherid = $("#studid").val();
+				// 	//alert(teacherid)checkID,validId;
+				// 	$.post("<?php echo site_url("index.php/feeControllers/getFsd") ?>",{teacherid : teacherid}, function(data){
+				// 		$("#getFsd").html(data);
+				// 		});
+				// 	});
+
+				    $("#sonu").hide();
 				$("#studid").keyup(function(){
-					var teacherid = $("#studid").val();
-					//alert(teacherid)checkID,validId;
-					$.post("<?php echo site_url("index.php/feeControllers/getFsd") ?>",{teacherid : teacherid}, function(data){
+					var studentid = $("#studid").val();
+					//alert(studentid);
+					$.post("<?php echo site_url("index.php/feeControllers/getFsd") ?>",{studentid : studentid}, function(data){
 						$("#getFsd").html(data);
 						});
 					});

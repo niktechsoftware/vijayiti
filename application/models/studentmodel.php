@@ -5,9 +5,19 @@ class StudentModel extends CI_Model{
 		$result = $this->db->get("student_info");
 		return $result;
 	}
-	function getStudentDetail($studentId){
+	function getStudentDetail1($studentId){
 		$this->db->where("enroll_num",$studentId);
 		return $this->db->get("student_info");
+	}
+
+	function getStudentDetail($studentId1){
+		//$this->db->where("school_code",$this->session->userdata("school_code"));
+		//$this->db->where("status",1);
+		$this->db->where("s_no",$studentId1);
+		$result = $this->db->get("student_info");
+		return $result;
+		
+	
 	}
 	function getGurdianDetail($studentId){
 		$this->db->where("enroll_num",$studentId);

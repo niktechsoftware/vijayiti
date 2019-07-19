@@ -137,6 +137,31 @@
 							}
 					});
 				});
+
+				  $("#streamListshow").change(function(){
+    	            var streamid = $("#streamListshow").val();
+    	        
+    	          // alert(streamid);
+    	            $.post("<?php echo site_url('configureClassControllers/getSectionbyStream') ?>", {streamid : streamid}, function(data){
+    	            	// alert(data);
+    	                $("#sectionshow").html(data);
+
+    	               
+    	    		});
+    	        });
+
+          $("#sectionshow").change(function(){
+        			
+     	            var sectionid = $("#sectionshow").val();
+     	             var streamid = $("#streamListshow").val();
+     	           // alert(sectionid);
+     	             // alert(streamid);
+     	            $.post("<?php echo site_url('configureClassControllers/getclass') ?>", {sectionid : sectionid,streamid:streamid}, function(data){
+     	            	//alert(data);
+     	                $("#classshow").html(data);
+     	                //  alert(data);
+     	    		});
+     	        });
 				Main.init();
 				SVExamples.init();
 				FormValidator.init();

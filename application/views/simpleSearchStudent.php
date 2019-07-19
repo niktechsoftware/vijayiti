@@ -117,12 +117,26 @@ $result = $this->db->get("student_info");?>
 									</tr>
 								</thead>
 								<tbody>
-									<?php $sno = 1; foreach ($result->result() as $row): ?>
+									<?php $sno = 1; foreach ($result->result() as $row):
+
+									$this->db->where('id',$row->class_id);
+								$cinfo=	$this->db->get('class_info')->row();
+								$str=$cinfo->streem;
+								$sec=$cinfo->section;
+								$this->db->where('id',$str);
+							$stream=	$this->db->get('stream')->row();
+
+								$this->db->where('id',$sec);
+							$section=	$this->db->get('class_section')->row();
+
+
+
+									 ?>
 									<tr>
 										<td><?php echo $sno; ?></td>
 										<td><?php echo $row->enroll_num; ?></td>
 										<td><?php echo $row->name; ?></td>
-										<td><?php echo $row->unit." ".$row->trade; ?></td>
+										<td><?php echo $section->section." ".$stream->stream; ?></td>
 										<td><?php echo $row->address1." ".$row->address2; ?></td>
 										<td><?php echo $row->mobile; ?></td>
 										<td><a href="<?php echo base_url(); ?>index.php/studentController/admissionSuccess/<?php echo $row->enroll_num;?>">Full Profile</a></td>

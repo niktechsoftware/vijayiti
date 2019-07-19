@@ -113,13 +113,13 @@
 											</td>
 											<td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
 										</tr>
-										<tr>
+										<!-- <tr>
 											<td>shift</td>
 											<td>
 												<?php echo $personalInfo->shift; ?>
 											</td>
 											<td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
-										</tr>
+										</tr> -->
 										<tr>
 											<td>Login ID</td>
 											<td>

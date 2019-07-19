@@ -37,22 +37,22 @@ class InvoiceController extends CI_Controller{
 		$this->db->where("invoice_no",$invoiceNo);
 		$fee_bank_detail = $this->db->get("fee_bank_detail")->row();
 		
-		$this->db->where("student_id",$studentId);
-		$fee_shedule = $this->db->get("fee_shedule")->row();
+		// $this->db->where("s_no",$studentId);
+		// $fee_shedule = $this->db->get("fee_shedule")->row();
 		
 		$this->db->where("student_id",$studentId);
 	
 		$one_time_fee = $this->db->get("one_time_fee")->row();
 		
-		$this->db->where("enroll_num",$studentId);
+		$this->db->where("s_no",$studentId);
 		$stuInfo = $this->db->get("student_info")->row();
 		
-		$this->db->where("student_id",$studentId);
+		$this->db->where("student_id",$stuInfo->enroll_num);
 		$pInfo = $this->db->get("guardian_info")->row();
 		
 		$data['rowb'] = $fee_deposit;
 		$data['fee_bank_detail'] = $fee_bank_detail;
-		$data['fee_shedule'] = $fee_shedule;
+		//$data['fee_shedule'] = $fee_shedule;
 		$data['one_time_fee'] = $one_time_fee;
 		$data['isAdmission'] = $isAdmission;
 		$data['reciever_name'] = $reciever_name;

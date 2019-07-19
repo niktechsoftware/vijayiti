@@ -290,6 +290,8 @@ class Login extends CI_Controller{
 		$data['mainPage'] = 'Students';
 		$data['subPage'] = 'New Admission';
 		$this->load->model("allFormModel");
+			$this->load->model('configurefeemodel');
+		
 		$data['className'] = $this->allFormModel->getClass()->result();
 		$data['title'] = 'New Admission';
 		$data['headerCss'] = 'headerCss/newAdmissionCss';
@@ -340,29 +342,72 @@ class Login extends CI_Controller{
 		$data['mainContent'] = 'oldStudentsDetails';
 		$this->load->view("includes/mainContent", $data);
 	}
-	
-	function collectFee(){
+
+		function collectFee(){
+		$this->load->model("feemodel");
 		$cdate=date("Y-m-d");
-		/*
-		$this->load->model("feeModel");
-		$req=$this->feeModel->getHoliDay($cdate);
-		if($req->num_rows() > 0)
-		{
-			$data['request']=$req;
+		$data['stud_id']=$this->uri->segment(3);
+	if($this->uri->segment(3)){
+
+			if( $this->uri->segment(3) != "feeFalse" ){
+				$fsd_id = $this->uri->segment(4);
+		$data["fsd_id"]=$fsd_id;
+		//$this->db->where("school_code",$this->session->userdata("school_code"));
+		$this->db->where("id",$fsd_id);
+		$data['fsddate']=$this->db->get("fsd");
+
+				$data['totdata'] = $this->feemodel->getstugurboth($this->uri->segment(3));
+				$getfees = $this->feemodel->getFeeSlab();
+				//print_r($getfees);
+				if($getfees->num_rows()>0){
+				    //echo $getfees->row()->apply_method;
+				$data['feeSlab'] = $getfees->row()->apply_method;
+                
+				$data['pageTitle']   = 'Fee collection';
+				$data['smallTitle']  = 'Student Fee Collection';
+				$data['mainPage'] 	 = 'Fee';
+				$data['subPage'] 	 = 'Fee collection';
+				$data['title'] 		 = 'Fee collection';
+				$data['headerCss'] 	 = 'headerCss/feeCss';
+				$data['footerJs'] 	 = 'footerJs/feeJs';
+				$data['mainContent'] = 'collectFee';
+			$this->load->view("includes/mainContent", $data);
+				}else{?>
+				    <h1> Please Define your Fee Slab First or Contact to Admin</h1>
+			<?php	}
+			}
+			else{
+				$data['stud_id']='0';
+				$data['pageTitle'] 	 = 'Fee collection';
+				$data['smallTitle']  = 'Student Fee Collection';
+				$data['mainPage'] 	 = 'Fee';
+				$data['subPage'] 	 = 'Fee collection';
+				$data['title'] 		 = 'Fee collection';
+				$data['headerCss'] 	 = 'headerCss/feeCss';
+				$data['footerJs'] 	 = 'footerJs/feeJs';
+				$data['mainContent'] = 'collectFee';
+				$this->load->view("includes/mainContent", $data);
+			}
+		}
+		else {
+			$data['stud_id']='0';
 			$data['pageTitle'] = 'Fee collection';
 			$data['smallTitle'] = 'Student Fee Collection';
-			$data['mainPage'] = 'Configuration';
-			$data['subPage'] = 'Class, Section, Subject Stream';
-		
-			$data['title'] = 'Configure Class/Section';
-			$data['headerCss'] = 'headerCss/errorCss';
-			$data['footerJs'] = 'footerJs/errorJs';
-			$data['mainContent'] = 'errorView';
+			$data['mainPage'] = 'Fee';
+			$data['subPage'] = 'Fee collection';
+			$data['title'] = 'Fee collection';
+			$data['headerCss'] = 'headerCss/feeCss';
+			$data['footerJs'] = 'footerJs/feeJs';
+			$data['mainContent'] = 'collectFee';
 			$this->load->view("includes/mainContent", $data);
 		}
-		else 
-		{ */
-			//$data['request']=$req->result();
+	}
+	
+
+
+	
+	function collectFee1(){
+		$cdate=date("Y-m-d");
 			$data['pageTitle'] = 'Fee collection';
 			$data['smallTitle'] = 'Student Fee Collection';
 			$data['mainPage'] = 'Fee';
