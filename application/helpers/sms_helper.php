@@ -1,7 +1,7 @@
 <?php
 function sms($number,$msg)
 {  
-$url="http://bulksms.niktechsoftware.com/vendorsms/pushsms.aspx?user=ramdoot&password=ghazipur@123&msisdn=".$number."&sid=RAMDOT&msg=".urlencode($msg)."&fl=0&gwid=2";
+$url="http://bulksms.niktechsoftware.com/vendorsms/pushsms.aspx?user=vijayiti&password=vijayiti@123&msisdn=".$number."&sid=VIJAYI&msg=".urlencode($msg)."&fl=0&gwid=2";
 	
 //$url="http://bulksms.gfinch.in/api/sendmsg.php?user=ramdoot&pass=ghazipur@123&sender=RAMDOT&phone=".$number."&text=".urlencode($msg)."&priority=ndnd&stype=normal";
 	//$url = "http://mysms.sms7.biz/rest/services/sendSMS/sendGroupSms?AUTH_KEY=".$authkey."&message=".urlencode($message)."&senderId=".$senderID."&routeId=1&mobileNos=".$number."&smsContentType=english";

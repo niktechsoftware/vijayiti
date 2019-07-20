@@ -30,7 +30,7 @@
                   If You change its may affect Your Fee Structure and Other Section.
                   </div>
                  <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                       <div class="panel panel-calendar">
                         <div class="panel-heading panel-blue border-light">
                           <h4 class="panel-title text-center">Create FSD Section</h4>
@@ -51,7 +51,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                       <div class="panel panel-calendar">
                         <div class="panel-heading panel-green border-light">
                           <h4 class="panel-title text-center">Old/Current FSD Section </h4>

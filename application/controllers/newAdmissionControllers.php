@@ -90,9 +90,7 @@ $datastudent = array(
 					sms($f_mobile,$msg);
 				}
 					
-					
 			//---------------------------------------------- END CHECK SMS SETTINGS -----------------------------------------
-			
 			
 				redirect(base_url()."index.php/studentController/admissionSuccess/$enroll_number");
 			

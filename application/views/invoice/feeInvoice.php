@@ -189,7 +189,7 @@ $tdiscount=0;
       </div>
           
             <div style="display:inline-block; background-color:#e5952d">
-            <table style="width:500px">
+            <table style="width:490px">
                 <tbody>
         <tr class='text-uppercase'>
                     <td class="meta-head" style="padding: 0 5px 0 5px; font-size:12px;"><b>Reciept No</b></td>

@@ -143,7 +143,7 @@
                     <form action="<?php echo base_url() ?>configureFeeController/apply_method"
                           method="post">
                     <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <h4 style="color:red;"><b>
                           Choose Method:</b></h4>
                     </div>
@@ -157,9 +157,11 @@
                         <option value="6" id="5">Half Yearly</option>
                         <option value="12" id="6">Yearly</option>
                       </select>
+                    </div> <div class="col-sm-4">
+                      <input type="submit" class="form-control btn-primary" id="submit" name="submit" value="Submit"/>
                     </div>
                     </div>    
-                    <div class="row">
+                  <!--   <div class="row"> -->
                    <!--  <div class="col-md-4">
                       <h4 style="color:red;"><b>
                       Late Fee Charge Type:</b></h4>
@@ -173,19 +175,17 @@
                       </select>
                     </div>
                     -->
-                    </div>
-                    <div class="row">
+                   <!--  </div> -->
+                   <!--  <div class="row"> -->
                    <!--  <div class="col-md-4">
                       <h4 style="color:red;"><b>
                       Late Fee Amount:</b></h4>
                     </div> -->
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                       <input type="text" class="form-control" id="lateamt" name="lateamt" placeholder="Enter Amount" required/>
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="submit" class="form-control btn-primary" id="submit" name="submit" value="Submit"/>
-                    </div>
-                    </div>
+                    </div> -->
+                   
+                   <!--  </div> -->
                     </form>
                     <?php }?>
                   </div>

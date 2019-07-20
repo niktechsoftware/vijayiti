@@ -147,6 +147,7 @@ function __construct()
 		
 	}
 
+
 	public function addfeecategory(){
 		$stream=$this->input->post('streamName');
 		$this->load->model('configureClassModel');
@@ -155,6 +156,30 @@ function __construct()
 		$this->load->view("ajax/addfeecat",$data);
 	}
 	
+	public function addfeecategory1(){
+             $strm= $this->input->post("stream");
+		$db = array(
+			"cat_name" => $strm,
+				//"school_code"=>$this->session->userdata("school_code"),
+		);
+		if(strlen($strm) > 1){
+			
+			$insdt=$this->db->insert("fee_cat",$db);
+
+			if($insdt){
+				redirect("index.php/login/feecategory");
+			}
+         else{?>
+ 
+ <script>alert("sorry ! here is some technical error plz try again later");</script>
+         <?php	redirect("index.php/login/feecategory");
+         }
+		}
+		//$this->db->where("school_code",$this->session->userdata("school_code"));
+	
+	}
+	
+
 	public function getStream(){
 		$className = $this->input->post("className");
 		$this->load->model('configureClassModel');

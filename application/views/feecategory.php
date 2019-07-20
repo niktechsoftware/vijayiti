@@ -1,4 +1,6 @@
 <!-- start: PAGE CONTENT -->
+<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.1.1.min.js"></script>
+
 <div class="row">
   <div class="col-sm-12">
     <!-- start: INLINE TABS PANEL -->
@@ -36,17 +38,21 @@
                         <div class="panel-heading panel-blue border-light">
                           <h4 class="panel-title">Add Fee Category</h4>
                         </div>
+                        <form action="<?php echo base_url();?>index.php/configureClassControllers/addfeecategory1" method="post">
                         <div class="panel-body">
                           <div class="text-black text-large">
                             <span id="name" Style="color:red;"></span>
-                            <input type="text" id="addfeecategory" class="text-uppercase">
-                            <a href="#" class="btn btn-sm btn-blue" id="addfeecatButton"><i class="fa fa-check"></i>
-                              Add Category</a></<br><br><br>
+                            <input type="text" id="addfeecategory" name="stream" class="text-uppercase" style="border:1px solid">
+                            <!-- <a href="index.php/configureClassControllers/addfeecategory1" class="btn btn-sm btn-blue" id="addfeecatButton1"><i class="fa fa-check"></i>
+                              Add Category</a> -->
+                                   <input type="submit" value="Add Category" class="btn btn-sm btn-light-blue">
+                              <br><br><br>
                             <div class="alert alert-warning"> Type a Category name and press Add Category.If Category added
                               successfully then it show in right side panel where you can change the name and Delete it.
                             </div>
                           </div>
                         </div>
+                      </form>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -54,7 +60,29 @@
                         <div class="panel-heading panel-green border-light">
                           <h4 class="panel-title">Category List</h4>
                         </div>
-                        <div class="panel-body" id="feeList1">
+                        <div class="panel-body" id="feeList12">
+                          <?php 
+                        $query = $this->db->get("fee_cat");
+    
+
+if($query->num_rows()>0):
+$i = 1;
+  foreach ($query->result() as $row):
+   
+?>
+    <div class="text-white text-sm pull-left space10">
+      <span id="name2" Style="color:red;"></span>
+      <input type="text" id="streamValue<?php echo $i;?>" size="13" value="<?php echo $row->cat_name;?>" class="text-uppercase" >
+      <input type="hidden" id="streamId<?php echo $i;?>" size="13" value="<?php echo $row->id; ?>">
+      <a href="#" class="btn btn-sm btn-light-green" id="edit<?php echo $i;?>"><i class="fa fa-edit"></i> Edit</a>
+      <a href="#" class="btn btn-sm btn-light-green" id="delete<?php echo $i;?>"><i class="fa fa-trash-o"></i> Delete</a>
+    </div>
+    
+<?php
+  $i++;
+  endforeach;
+endif;
+?>
 
                         </div>
 												<div class="container">
@@ -172,3 +200,44 @@
   </div>
 </div>
 <!-- end: PAGE CONTENT-->
+<script>
+        <?php for($j = 1; $j < $i; $j++){ ?>
+                $("#edit<?php echo $j; ?>").click(function(){
+                    var streamId = $('#streamId<?php echo $j; ?>').val();   
+                    var streamName = $('#streamValue<?php echo $j; ?>').val();
+                    //alert(streamId);
+                    var form_data = {
+                            streamId : streamId,
+                            streamName : streamName
+                        };
+                $.ajax({
+                    url: "<?php echo site_url("index.php/configureClassControllers/updatecatforfee") ?>",
+                    type: 'POST',
+                    data: form_data,
+                    success: function(msg){
+                        $("#streamList1").html(msg);
+                    }
+                });
+                });
+    
+                $("#delete<?php echo $j; ?>").click(function(){
+                    var streamId = $('#streamId<?php echo $j; ?>').val();   
+                    alert("Are You Sure , You want to delete your fee category");
+                    $.post("<?php echo site_url('index.php/configureClassControllers/deletefeecat') ?>", {streamId : streamId}, function(data){
+                        $("#streamList1").html(data);
+                        //alert(data);
+                    })
+                });
+     
+                    var input = document.getElementById("streamValue<?php echo $j;?>");
+                         input.addEventListener("keyup", function () {
+                     
+                         });
+
+                         input.addEventListener("keyup", function () {
+                          var x = document.getElementById("streamValue<?php echo $j;?>");
+                             x.value = x.value.toUpperCase();
+                         
+                  });
+                    <?php } ?>   
+</script>

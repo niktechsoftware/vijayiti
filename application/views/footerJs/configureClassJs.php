@@ -145,7 +145,7 @@
         alert("Your fsd is successfully Apply");
         $.post("<?php echo site_url('index.php/allFormController/updatefsd') ?>", {fsdid : fsdid,}, function(data){
             $("#showfsd1").html(data);
-                alert(data);
+               // alert(data);
         });
         $('#fsdselect').val("");
         //  $('#enddate').val("");
@@ -215,11 +215,24 @@
                   //alert(classid);
                 
               $.post("<?php echo site_url('configureFeeController/getfeeheadcategory') ?>",{classid : classid}, function(data){
-               alert(data);
+               //alert(data);
                       $("#subjectBox").html(data);
                        
                     });
                 });
+
+          $("#addfeecatButton").click(function(){
+            
+            var streamName = $('#addfeecategory').val();
+            alert("Fee Category successfully created");
+            $.post("<?php echo site_url('index.php/configureClassControllers/addfeecategory') ?>", {streamName : streamName}, function(data){
+                $("#feeList1").html(data);
+                //alert(data);
+            });
+            $('#addfeecategory').val("");
+
+
+        });
 
 
 
@@ -230,4 +243,65 @@
         Main.init();
         SVExamples.init();
     });
+</script>
+
+<script>
+        <?php for($j = 1; $j < $i; $j++){ ?>
+                $("#edit<?php echo $j; ?>").click(function(){
+                    var streamId = $('#streamId<?php echo $j; ?>').val();   
+                    var streamName = $('#streamValue<?php echo $j; ?>').val();
+                    //alert(streamId);
+                    var form_data = {
+                            streamId : streamId,
+                            streamName : streamName
+                        };
+                $.ajax({
+                    url: "<?php echo site_url("index.php/configureClassControllers/updatecatforfee") ?>",
+                    type: 'POST',
+                    data: form_data,
+                    success: function(msg){
+                        $("#streamList1").html(msg);
+                    }
+                });
+                });
+    
+                $("#delete<?php echo $j; ?>").click(function(){
+                    var streamId = $('#streamId<?php echo $j; ?>').val();   
+                    //alert(streamId);
+                    $.post("<?php echo site_url('index.php/configureClassControllers/deletefeecat') ?>", {streamId : streamId}, function(data){
+                        $("#streamList1").html(data);
+                        //alert(data);
+                    })
+                });
+     
+                       
+
+                      var input = document.getElementById("streamValue<?php echo $j;?>");
+                         input.addEventListener("keyup", function () {
+                        //  var text_value = document.getElementById("streamValue<?php echo $j;?>").value;
+                        //             if (!text_value.match(/^[A-Za-z]+$/)) {
+                        //                 document.getElementById("name2").innerHTML = "Only Alphabets Allow";
+                        //                  $('#edit<?php echo $j;?>').attr('disabled', 'disabled');
+
+                        //                    $(document).on('click', 'a', function(e) {
+                        //                   if ($(this).attr('disabled') == 'disabled') {
+                        //                      e.preventDefault();
+                        //                         }
+                        //                         window.location.reload();
+                        //                     });
+                        //                 document.getElementById("streamValue<?php echo $j;?>").focus();
+                        //                 if (text_value == "") {
+                        //                     document.getElementById("name2").innerHTML = " ";
+                        //                      window.location.reload();
+                        //                     document.getElementById("streamValue<?php echo $j;?>").focus();
+                        //                 }
+                        //             }
+                         });
+
+                         input.addEventListener("keyup", function () {
+                          var x = document.getElementById("streamValue<?php echo $j;?>");
+                             x.value = x.value.toUpperCase();
+                         
+                  });
+                    <?php } ?>   
 </script>

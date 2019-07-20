@@ -15,8 +15,8 @@ class StudentController extends CI_Controller{
 	
 		$studentId = $this->uri->segment(3);
 		
-		$stDetail = $this->studentModel->getStudentDetail($studentId);
-		
+		$stDetail = $this->studentModel->getStudentDetail1($studentId);
+		//print_r($stDetail);
 		
 		$data['studentProfile'] = $stDetail;
 		$data['title'] = 'Student Profile';

@@ -2,7 +2,7 @@
 class SearchStudentModel extends CI_Model{
 	
 	function getValue(){
-		$this->db->where("status","Active");
+		$this->db->where("status",1);
         $query = $this->db->get("student_info");
         return $query;
     }

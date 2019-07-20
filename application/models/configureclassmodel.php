@@ -72,6 +72,8 @@ class ConfigureClassModel extends CI_Model{
 		return $query;
 	}
 
+	
+
 	public function getStreamList(){
 		//$school_code = $this->session->userdata("school_code");
 		$query = $this->db->query("SELECT DISTINCT streem from class_info ORDER BY id");
