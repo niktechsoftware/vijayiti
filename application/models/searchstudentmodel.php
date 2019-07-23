@@ -13,4 +13,4 @@ class SearchStudentModel extends CI_Model{
     	$dam = $this->db->get("student_info");
     	return $dam;
     }
-}
+} 

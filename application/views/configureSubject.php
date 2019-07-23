@@ -14,46 +14,69 @@
 										</div>
 										<div class="row">
 											<div class="col-sm-4">
-												<div class="panel-heading panel-red border-light">
-													<h4 class="panel-title">Shift</h4>
-												</div>
-												<div class="panel-body">
-													<div class="form-group">
-														<select id="clname" class="form-control">
-															<option value="">Select Timing</option>
-															
-															<?php if(isset($classList)):?>
-															<?php foreach ($classList as $row):?>
-															<option value="<?php echo $row->class_name;?>"><?php echo $row->class_name;?></option>
-															<?php endforeach; endif;?>
-														</select>
-													</div>
-													<div class="text-red text-small">Please select a class, section and stream will automatically come select and add subject.</div>
-												</div>
-											</div>
-											<div class="col-sm-4">
-												<div class="panel-heading panel-green border-light">
-													<h4 class="panel-title">Trade</h4>
-												</div>
-												<div class="panel-body">
-													<div class="form-group">
-														<select id="streamList" class="form-control">
-															
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-4">
-												<div class="panel-heading panel-blue border-light">
-													<h4 class="panel-title">Unit</h4>
-												</div>
-												<div class="panel-body">
-													<div class="form-group">
-														<select id="section" class="form-control">
-														</select>
-													</div>
-												</div>
-											</div>
+
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-green">
+                              <h3 class="panel-title">Trade</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="streamListshow" class="form-control">
+                                  <option value="">Select Trade Name</option>
+                                  <?php
+                                          $this->load->model("configurefeemodel");
+                                        $result = $this->configurefeemodel->getStreamList();
+                                        $streamList = $result->result();
+                                        if(isset($streamList)):?>
+                                  <?php foreach ($streamList as $row):?>
+                                  <?php //$this->db->where("school_code",$this->session->userdata("school_code"));
+                                                                    $this->db->where('id',$row->streem);
+                                                          $row1=$this->db->get('stream');
+                                                          if($row1->num_rows()>0){
+                                                              $row2 =$row1->row();
+                                                                    ?>
+
+                                  <option value="<?php echo $row2->id;?>">
+                                    <?php echo $row2->stream;?></option>
+                                  <?php } endforeach; endif;?>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-red">
+                              <h3 class="panel-title">Unit</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="sectionshow" class="form-control">
+
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                         <div class="col-sm-4">
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-purple">
+                              <h3 class="panel-title">Shift</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="classshow" class="form-control">
+
+
+                                </select>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
 										</div>
 									</div>
 								</div>

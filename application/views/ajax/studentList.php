@@ -71,7 +71,7 @@
 												<?php endif; ?>
 												
 												<?php if(strlen($unit) > 1):?>
-												<th>Unit</th>
+												<th>Shift</th>
 												<?php endif; ?>
 												
 												<?php if(strlen($address1) > 1):?>
@@ -148,7 +148,16 @@
 										<tbody>
 											<?php $sno = 1; foreach ($result->result() as $row): ?>
 											<?php $stuId = $row->enroll_num; ?>
-											<?php  ?>
+											<?php $this->db->where('id',$row->class_id);
+													$cls=$this->db->get('class_info')->row();
+
+													$this->db->where('id',$cls->section);
+													$section=$this->db->get('class_section')->row();
+
+													$this->db->where('id',$cls->streem);
+													$stream=$this->db->get('stream')->row();
+
+													  ?>
 											<tr>
 												<td><?php echo $sno; ?></td>
 												
@@ -162,7 +171,7 @@
 												<?php endif; ?>											
 												
 												<?php if(strlen($unit) > 1):?>
-												<td><?php echo $row->unit; ?></td>
+												<td><?php echo $cls->class_name; ?></td>
 												<?php endif; ?>
 												
 												<?php if(strlen($address1) > 1):?>
@@ -214,11 +223,11 @@
 												<?php endif; ?>
 												
 												<?php if(strlen($shift) > 1):?>
-												<td><?php echo $row->shift; ?></td>
+												<td><?php echo $section->section; ?></td>
 												<?php endif;  ?>
 												
 													<?php if(strlen($trade) > 1):?>
-												<td><?php echo $row->trade; ?></td>
+												<td><?php echo $stream->stream; ?></td>
 												<?php endif; ?>
 												
 												<?php if(strlen($father_full_name) > 1):?>

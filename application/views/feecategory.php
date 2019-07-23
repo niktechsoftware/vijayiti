@@ -107,8 +107,8 @@ endif;
 										<div class="alert alert-info">
 											<center><h3 class="media-heading"><b>Welcome To  Configure Fees section</b></h3></center>
                     						<p class="media-timestamp">
-                    						    This is the Second Phase of Fee Category where we can see and update Fee Category by Class Wise. firstly you must need to select stream ,section,
-                    						    class respectively.after then you can see the list of Fees Category to update.
+                    						    This is the Second Phase of Fee Category where we can see and update Fee Category by Class Wise. firstly you must need to select Trade ,Unit,
+                    						    Shift respectively.after then you can see the list of Fees Category to update.
                     						<p class="media-timestamp">
                     						For	Update Fee Category  given in the chart below, press <strong>edit </strong>button And to <strong>Delete</strong> a Fee Category simply press <strong>delete</strong> button below the chart.
                     						</p>
@@ -117,12 +117,12 @@ endif;
                        <div class="col-sm-4">
                        <div class="panel">
                             <div class="panel-heading btn-dark-green">
-                              <h3 class="panel-title">Subject Stream</h3>
+                              <h3 class="panel-title">Trade</h3>
                             </div>
                             <div class="panel-body">
                               <div class="form-group">
                                 <select id="streamListshow" class="form-control">
-                                  <option value="">Select Stream Name</option>
+                                  <option value="">Select Trade Name</option>
                                   <?php
                                           $this->load->model("configurefeemodel");
                                         $result = $this->configurefeemodel->getStreamList();
@@ -150,7 +150,7 @@ endif;
                        <div class="col-sm-4">
                           <div class="panel">
                             <div class="panel-heading btn-dark-red">
-                              <h3 class="panel-title">Section</h3>
+                              <h3 class="panel-title">Unit</h3>
                             </div>
                             <div class="panel-body">
                               <div class="form-group">
@@ -165,7 +165,7 @@ endif;
                       <div class="col-sm-4">
                           <div class="panel">
                             <div class="panel-heading btn-dark-purple">
-                              <h3 class="panel-title">Class List</h3>
+                              <h3 class="panel-title">Shift</h3>
                             </div>
                             <div class="panel-body">
                               <div class="form-group">

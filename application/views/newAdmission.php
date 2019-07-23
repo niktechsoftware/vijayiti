@@ -304,7 +304,7 @@
 												Unit <span class="symbol required"></span>
 											</label>
 											 <select id="streamListshow" class="form-control">
-                                  <option value="">Select Stream Name</option>
+                                  <option value="">Select Trade Name</option>
                                   <?php
                                           $this->load->model("configurefeemodel");
                                         $result = $this->configurefeemodel->getStreamList();
@@ -327,7 +327,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label class="control-label">
-												Trade <span class="symbol required"></span>
+												Unit <span class="symbol required"></span>
 											</label>
 											 <select id="sectionshow" class="form-control">
 
@@ -338,7 +338,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label class="control-label">
-												Class <span class="symbol required"></span>
+												Shift <span class="symbol required"></span>
 											</label>
 											  <select id="classshow" class="form-control" name="classshow">
 

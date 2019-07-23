@@ -1,4 +1,4 @@
-<?php $this->db->where("status","Inactive"); 
+<?php $this->db->where("status",0); 
 $result = $this->db->get("student_info");?>
 <div class="container">
 	<div class="row">
@@ -112,6 +112,7 @@ $result = $this->db->get("student_info");?>
 										<th>Trade</th>
 										<th>Address</th>
 										<th>Unit</th>
+										<th>Shift</th>
 										<th>Mobile</th>						
 										<th>Settings</th>
 									</tr>
@@ -121,14 +122,24 @@ $result = $this->db->get("student_info");?>
 									$var=$result->result();
 									 if($var){
 									
-									$sno = 1; foreach ($result->result() as $row): ?>
+									$sno = 1; foreach ($result->result() as $row):
+
+									$this->db->where('id',$row->class_id);
+									$cls=$this->db->get('class_info')->row();
+									$this->db->where('id',$cls->streem);
+									$str=$this->db->get('stream')->row();
+									$this->db->where('id',$cls->section);
+									$sec=$this->db->get('class_section')->row();
+									 ?>
 									<tr>
 										<td><?php echo $sno; ?></td>
 										<td><?php echo $row->enroll_num; ?></td>
 										<td><?php echo $row->name; ?></td>
-										<td><?php echo $row->unit; ?></td>
+										<td><?php echo $str->stream; ?></td>
 										<td><?php echo $row->address1; ?></td>
-										<td><?php echo $row->unit; ?></td>
+										<td><?php echo $sec->section; ?></td>
+										<td><?php echo $cls->class_name; ?></td>
+
 										<td><?php echo $row->mobile; ?></td>
 										<td><a href="<?php echo base_url(); ?>index.php/studentController/admissionSuccess/<?php echo $row->enroll_num;?>">Full Profile</a></td>
 									</tr>

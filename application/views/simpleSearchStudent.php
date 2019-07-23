@@ -1,5 +1,5 @@
 <?php 
-$this->db->where("status","Active");
+$this->db->where("status",1);
 $result = $this->db->get("student_info");?>
 <div class="container">
 	<div class="row">

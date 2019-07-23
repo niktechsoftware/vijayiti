@@ -58,7 +58,7 @@ $db['default']['hostname'] = 'localhost';
  $db['default']['password'] = '';
  $db['default']['database'] = 'vijayiti';
 
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

@@ -1,9 +1,9 @@
 <?php
 class SubjectModel extends CI_Model{
-	function getSubject($clName,$stream,$section){
+	function getSubject($clName){
 		$this->db->where("class_id",$clName);
-		$this->db->where("stream",$stream);
-		$this->db->where("section",$section);
+		//$this->db->where("stream",$stream);
+		//$this->db->where("section",$section);
 		$result = $this->db->get("subject");
 		return $result;
 	}

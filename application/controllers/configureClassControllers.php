@@ -35,7 +35,7 @@ function __construct()
 			$query = $this->configureClassModel->getByClassStream($streamid);
 			if($query->num_rows()>0)
 			{
-           echo   '<option value="">Select Section</option>';
+           echo   '<option value="">Select Unit</option>';
 			foreach ($query->result() as $row)
 			{
 				?>
@@ -66,7 +66,7 @@ function __construct()
 			$query = $this->configureClassModel->getClassBySectionStream($streamid,$sectionid);
 			if($query->num_rows()>0)
 			{
-           echo   '<option value="">Select Class</option>';
+           echo   '<option value="">Select Shift</option>';
 			foreach ($query->result() as $row)
 			{
 				?>

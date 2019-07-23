@@ -1,11 +1,12 @@
 <?php
 class SubjectController extends CI_Controller{
 	function getSubject(){
-		$clName = $this->input->post("className");
-		$stream = $this->input->post("stream");
-		$section = $this->input->post("section");
+		$clName = $this->input->post("classid");
+		//$stream = $this->input->post("stream");
+		//$section = $this->input->post("section");
+
 		$this->load->model("subjectModel");
-		$result = $this->subjectModel->getSubject($clName,$stream,$section);
+		$result = $this->subjectModel->getSubject($clName);
 		?>
 			<div class="col-sm-12">
 				<!-- start: INLINE TABS PANEL -->
@@ -26,9 +27,8 @@ class SubjectController extends CI_Controller{
 														<a href="#" class="btn btn-sm btn-light-blue" id="addSSubjectButton"><i class="fa fa-check"></i> Add Subject</a>
 													</div>
 													
-													<div class="text-blue text-small">Please type Subject name make <strong>sure after admission Subject name cannot be Edited in any case </strong> if you change 
-																		then the exam section, student section and time scheduling may be affected.Then press add subject button after added it will show you right side 
- 																		side panel.		
+													<div class="text-blue text-small">Please type Subject name Then press add subject button after added it will show you right side 
+ 													panel.		
 												</div>
 											</div>
 										</div>
@@ -36,11 +36,11 @@ class SubjectController extends CI_Controller{
 										<script>
 											 $("#addSSubjectButton").click(function(){
 										            var clname = $("#clname").val();
-										            var stream = $("#streamList").val();
-										            var section = $("#section").val();
+										            //var stream = $("#streamList").val();
+										            //var section = $("#section").val();
 										            var subject = $("#addSubject").val();
 										            //alert(clname+","+stream+","+section+","+subject);
-										            $.post("<?php echo site_url('index.php/subjectController/addSubject') ?>", {className : clname, stream : stream, section : section, subject : subject}, function(data){
+										            $.post("<?php echo site_url('index.php/subjectController/addSubject') ?>", {className : clname, subject : subject}, function(data){
 										                $("#subjectBox").html(data);
 										                //alert(data);
 										    		});
@@ -70,14 +70,14 @@ class SubjectController extends CI_Controller{
 															    
 															    $("#edit<?php echo $j; ?>").click(function(){
 															    	var clname = $("#clname").val();
-														            var stream = $("#streamList").val();
-														            var section = $("#section").val();
+														            //var stream = $("#streamList").val();
+														            //var section = $("#section").val();
 														            var subject = $("#addSubject").val();
 														            
 														    		var subjectId = $('#subjectId<?php echo $j; ?>').val();	
 														    		var subjectName = $('#subjectValue<?php echo $j; ?>').val();
 														    		//alert(streamName);
-														    		$.post("<?php echo site_url('index.php/subjectController/updateSubject') ?>", {subjectId : subjectId, subjectName : subjectName, className : clname, stream : stream, section : section, subject : subject}, function(data){
+														    		$.post("<?php echo site_url('index.php/subjectController/updateSubject') ?>", {subjectId : subjectId, subjectName : subjectName, className : clname,  subject : subject}, function(data){
 														                $("#subjectBox").html(data);
 														                //alert(data);
 														    		})
@@ -85,13 +85,13 @@ class SubjectController extends CI_Controller{
 										
 															    $("#delete<?php echo $j; ?>").click(function(){
 															    	var clname = $("#clname").val();
-														            var stream = $("#streamList").val();
-														            var section = $("#section").val();
+														            //var stream = $("#streamList").val();
+														            //var section = $("#section").val();
 														            var subject = $("#addSubject").val();
 														            
 														    		var subjectId = $('#subjectId<?php echo $j; ?>').val();	
 														    		//alert(streamName);
-														    		$.post("<?php echo site_url('index.php/subjectController/deleteSubject') ?>", {subjectId : subjectId, className : clname, stream : stream, section : section, subject : subject}, function(data){
+														    		$.post("<?php echo site_url('index.php/subjectController/deleteSubject') ?>", {subjectId : subjectId, className : clname, subject : subject}, function(data){
 														                $("#subjectBox").html(data);
 														                //alert(data);
 														    		})
@@ -118,14 +118,14 @@ class SubjectController extends CI_Controller{
 	
 	function addSubject(){
 		$clName = $this->input->post("className");
-		$stream = $this->input->post("stream");
-		$section = $this->input->post("section");
+		//$stream = $this->input->post("stream");
+		//$section = $this->input->post("section");
 		$subject = $this->input->post("subject");
 		
 		$data = array(
 				"class_id" => $clName,
-				"stream" => $stream,
-				"section" => $section,
+				//"stream" => $stream,
+				//"section" => $section,
 				"subject" => $subject
 		);
 		
@@ -154,8 +154,8 @@ class SubjectController extends CI_Controller{
 	
 	function deleteSubject(){
 		$clName = $this->input->post("className");
-		$stream = $this->input->post("stream");
-		$section = $this->input->post("section");
+		//$stream = $this->input->post("stream");
+		//$section = $this->input->post("section");
 		$subject = $this->input->post("subject");
 		
 		$subjectId = $this->input->post("subjectId");

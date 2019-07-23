@@ -34,12 +34,10 @@
                     <h3 class="media-heading text-center">Welcome to Fee Configuration Area.</h3>
                     </center>
                     This is very important area to define date for deposit month fee.You Can change
-                    Date in any time but all Student's who remain to deposit their fee will be
-                    change accordingly.
-                    <p> Note:-Define deposite Date for every Month . <br>If you want to take <strong> Late Fee </strong> 
-                    you can define late fee charges also. One row or Month will
+                    Date in any time.
+                    Note:-Define deposite Date for every Month .One row or Month will
                         save at a Time on click <strong>SAVE </strong> Button.
-                      </p>
+                      
 
                   </div>
                   <div class="panel-body">
@@ -202,8 +200,8 @@
 									<div class="panel-body">
 										<div class="alert alert-info">
 											<center><h3 class="media-heading"><b>Important Instructions about Adding Subjects To A Trade !</b></h3></center>
-                    						<p class="media-timestamp">Welcome to Add Subject area where we can attach subjects belonging to a class. Please ensure that we have created Stream, class, and Section. After that we can able to take admission in any class.
-                    						 to add subject choose class name, stream name and section name respectively from the drop down button and press Submit.</p>
+                    						<p class="media-timestamp">Welcome to Add Subject area where we can attach subjects belonging to a class. Please ensure that we have created Trade, Unit, and Shift. After that we can able to take admission in any class.
+                    						 to add subject choose Trade name, Unit name and Shift name respectively from the drop down button and press Submit.</p>
                     						<p class="media-timestamp">
                     							Update your subjects in the boxes given in the chart and press save subjects button bellow the chart.
                     						</p>
@@ -257,12 +255,12 @@
 
                           <div class="panel">
                             <div class="panel-heading btn-dark-green">
-                              <h3 class="panel-title">Subject Stream</h3>
+                              <h3 class="panel-title">Trade</h3>
                             </div>
                             <div class="panel-body">
                               <div class="form-group">
                                 <select id="streamListshow" class="form-control">
-                                  <option value="">Select Stream Name</option>
+                                  <option value="">Select Trade Name</option>
                                   <?php
                                           $this->load->model("configurefeemodel");
                                         $result = $this->configurefeemodel->getStreamList();
@@ -289,7 +287,7 @@
                         <div class="col-sm-4">
                           <div class="panel">
                             <div class="panel-heading btn-dark-red">
-                              <h3 class="panel-title">Section</h3>
+                              <h3 class="panel-title">Unit</h3>
                             </div>
                             <div class="panel-body">
                               <div class="form-group">
@@ -304,7 +302,7 @@
                          <div class="col-sm-4">
                           <div class="panel">
                             <div class="panel-heading btn-dark-purple">
-                              <h3 class="panel-title">Class List</h3>
+                              <h3 class="panel-title">Shift</h3>
                             </div>
                             <div class="panel-body">
                               <div class="form-group">

@@ -156,6 +156,8 @@ class Login extends CI_Controller{
 		$data['footerJs'] = 'footerJs/subjectJs';
 		$data['mainContent'] = 'configureSubject';
 		$this->load->model("configureClassModel");
+			$this->load->model('configurefeemodel');
+		
 		$result = $this->configureClassModel->foundClassName();
 		$data['classList'] = $result->result();
 		$this->load->view("includes/mainContent", $data);

@@ -1,7 +1,7 @@
 <?php
 class StudentModel extends CI_Model{
 	function studentList(){
-		$this->db->where("status","Active");
+		$this->db->where("status",1);
 		$result = $this->db->get("student_info");
 		return $result;
 	}

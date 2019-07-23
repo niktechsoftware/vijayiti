@@ -76,7 +76,8 @@
         $("#streamList").change(function(){
             var clname = $("#clname").val();
             var stream = $("#streamList").val();
-            //alert(clname);
+           // alert(clname);
+            //alert(stream);
             $.post("<?php echo site_url('index.php/configureClassControllers/getSection') ?>", {className : clname, stream : stream}, function(data){
                 $("#section").html(data);
                 //alert(data);
@@ -93,6 +94,48 @@
                 //alert(data);
     		});
         });
+
+
+          $("#streamListshow").change(function(){
+                    var streamid = $("#streamListshow").val();
+                
+                  // alert(streamid);
+                    $.post("<?php echo site_url('configureClassControllers/getSectionbyStream') ?>", {streamid : streamid}, function(data){
+                        // alert(data);
+                        $("#sectionshow").html(data);
+
+                       
+                    });
+                });
+
+          $("#sectionshow").change(function(){
+                    
+                    var sectionid = $("#sectionshow").val();
+                     var streamid = $("#streamListshow").val();
+                   // alert(sectionid);
+                     // alert(streamid);
+                    $.post("<?php echo site_url('configureClassControllers/getclass') ?>", {sectionid : sectionid,streamid:streamid}, function(data){
+                        //alert(data);
+                        $("#classshow").html(data);
+                        //  alert(data);
+                    });
+                });
+
+           $("#classshow").change(function(){
+                    var classid = $("#classshow").val();
+                   // var streamid = $("#streamListshow").val();
+                  //  var sectionid = $("#sectionshow").val();
+                  //alert(classid);
+                
+              $.post("<?php echo site_url('subjectController/getSubject') ?>",{classid : classid}, function(data){
+               //alert(data);
+                      $("#subjectBox").html(data);
+                       
+                    });
+                });
+
+
+
         
         
         Main.init();

@@ -4,7 +4,8 @@ class newAdmissionControllers extends CI_Controller{
 	public function addinfo(){
 		
              $s_no = $this->db->query("SELECT s_no From student_info order by s_no DESC Limit 1")->row()->s_no;
-		$enroll_number= $s_no+"S"+2000;
+             $nm=2000+$s_no;
+		$enroll_number="STUD".$nm;
 $datastudent = array(
 				"enroll_num" => $enroll_number,
 				"name" => $this->input->post("name"),
