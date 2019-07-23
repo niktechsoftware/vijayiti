@@ -2,7 +2,8 @@
 class singleStudentModel extends CI_Model{
 	
 	function getStudentName($id){
-	$this->db->where("student_id",$id);
+		
+	$this->db->where("enroll_num",$id);
 	$query=$student = $this->db->get("student_info");
 	return $query;
 	}
@@ -46,8 +47,9 @@ class singleStudentModel extends CI_Model{
 		return $query;
 		}
 		function getteacherName($eid){
-			$this->db->where("emp_no",$eid);
-			$query= $this->db->get("employee_info");
+			
+			$this->db->where('emp_no',$eid);
+			$query= $this->db->get("employee_info")->row();
 			return $query;
 		}
 	

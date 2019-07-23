@@ -123,17 +123,19 @@
 									<tbody>
 											
 												<?php $i=1;foreach($request as $row):?><tr>
+														<?php $this->db->where("s_no",$row->student_id );
+													$var1 = $this->db->get ("student_info");
+													if($var1->num_rows()>0){?>
 											<td><?php echo $i?></td>
-											<td><?php $sid=$row->student_id;  echo $row->student_id;?></td>
-											<td><?php echo $row->student_name;?></td>
-											<td><?php echo $row->total_due;?></td>
+											<td><?php $sid=$var1->row()->enroll_num;  echo $var1->row()->enroll_num;?></td>
+											<td><?php echo $var1->row()->name;?></td>
+											<td><?php echo $row->mbalance;?></td>
 													<?php
 													
-													$this->db->where ("enroll_num",$row->student_id );
-													$var1 = $this->db->get ("student_info")->row ();
+												
 													?>
-													<td><?php if($var1->mobile){echo $var1->mobile;}?></td>
-										</tr><?php $i++; endforeach; ?>
+													<td><?php if($var1->row()->mobile){echo $var1->row()->mobile;}?></td>
+										</tr><?php $i++; }endforeach; ?>
 													</tbody>
 								</table>
 							</div>

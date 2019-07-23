@@ -7,14 +7,14 @@ class TeacherController extends CI_Controller{
 		$this->load->model("teacherModel");
 	}
 	function presentiH(){
-		$sec = $this->input->post("section");
-		$cla = $this->input->post("classv");
-		$check = $this->teacherModel->checkPresenti($sec,$cla);
+		//$sec = $this->input->post("section");
+		$cla = $this->input->post("classid");
+		$check = $this->teacherModel->checkPresenti($cla);
 		if($check->num_rows() > 0)
 		{
 		
 		}else{
-		if($sec)
+		if($cla)
 		{?>
 			<tr>
 			<td>S.No.</td>
@@ -54,14 +54,14 @@ class TeacherController extends CI_Controller{
 	
 	
 	function presenti(){
-		$data['sec'] = $this->input->post("section");
-		$sec = $this->input->post("section");
-		$data['cla']  = $this->input->post("classv");
-		$cla = $this->input->post("classv");
-		$data['tid'] = $this->input->post("teacherid");
-		$tid= $this->input->post("teacherid");
-		$data['check'] = $this->teacherModel->checkPresenti($sec,$cla);
-		$data['var'] = $this->teacherModel->getPresenti($sec,$cla,$tid);
+		//$data['sec'] = $this->input->post("section");
+		//$sec = $this->input->post("section");
+		$data['cla']  = $this->input->post("classid");
+		$cla = $this->input->post("classid");
+		//$data['tid'] = $this->input->post("teacherid");
+		//$tid= $this->input->post("teacherid");
+		$data['check'] = $this->teacherModel->checkPresenti($cla);
+		$data['var'] = $this->teacherModel->getPresenti($cla);
 		$this->load->view("ajax/studenceAtten",$data);
 	}
 	
@@ -140,12 +140,12 @@ class TeacherController extends CI_Controller{
 			  	$this->load->model("teacherModel");
 			  	for($j=1; $j<$i; $j++){
 			  		$data = array(
-			  				"t_id" => $this->input->post("tID"),
-			  				"emp_no" => $this->input->post("empID$j"),
+			  				"taken_id" => $this->input->post("tID"),
+			  				"emp_id" => $this->input->post("empID$j"),
 			  				"attendance" => $this->input->post("gender$j"),
 			  				"a_date" => $date1
 			  		);
-			  		$this->db->where("emp_no",$this->input->post("empID$j"));
+			  		$this->db->where("emp_id",$this->input->post("empID$j"));
 			  		$this->db->where("a_date",$date1);
 			  		$req = $this->db->get("teacher_attendance");
 			  		if($req->num_rows() > 0){
@@ -169,10 +169,10 @@ class TeacherController extends CI_Controller{
 			  	$this->load->model("teacherModel");
 			  	for($j=1; $j<$i; $j++){
 			  		$data = array(
-			  				"section" => $this->input->post("section"),
-			  				"class" => $this->input->post("classv"),
-			  				"teacher_id" => $this->input->post("teacherid"),
-			  				"scholer_number" => $this->input->post("schno$j"),
+			  				//"section" => $this->input->post("section"),
+			  				"class_id" => $this->input->post("classv"),
+			  				//"teacher_id" => $this->input->post("teacherid"),
+			  				//"scholer_number" => $this->input->post("schno$j"),
 			  				"stu_id" => $this->input->post("stuID$j"),
 			  				"attendance" => $this->input->post("gender$j"),
 			  				"a_date" => date("Y-m-d")
@@ -284,15 +284,16 @@ class TeacherController extends CI_Controller{
 			  
 			  function stuReport(){
 			  		$edate = $this->input->post("edate");
-			  		$sec = $this->input->post("section");
+			  		//$sec = $this->input->post("section");
 			  		$cla = $this->input->post("classv");
 			  		$sdate = $this->input->post("sdate");
+
 			  		
 			  		$this->load->model("singleStudentModel");
 			  		$this->load->model("teacherModel");
 			  		$this->load->model("searchStudentModel");
 			  		
-			  		$var = $this->teacherModel->getStuReport($edate,$sec,$cla,$sdate);
+			  		$var = $this->teacherModel->getStuReport($edate,$cla,$sdate);
 			  		if($var->num_rows() > 0){
 			  			$sr = 1;
 			  			TeacherController::$sno = $sr;
@@ -303,9 +304,10 @@ class TeacherController extends CI_Controller{
 									<th>S.no.</th>
 									<th>Student Id</th>
 									<th>Student Name</th>
-									<th>Present</th>
-									<th>Absent</th>
-									<th>Leave</th>
+									<th>Attendance</th>
+									<td>Date</td>
+									<!-- <th>Absent</th>
+									<th>Leave</th> -->
 									<!-- <th>Detail</th>  -->
 								</tr>
 							</thead>
@@ -316,15 +318,17 @@ class TeacherController extends CI_Controller{
 			  					<td><?php echo TeacherController::$sno;?></td>
 			  					<td><?php $stuID = $row->stu_id;  echo $stuID;?></td>
 			  					<?php $stuname=$this->singleStudentModel->getStudentName($stuID)->row();?>
-			  					<td><?php echo $stuname->first_name."-".$stuname->midd_name."-".$stuname->last_name;?></td>
-			  					<td>
+			  					<td><?php echo $stuname->name;?></td>
+			  					<td><?php echo $row->attendance;?></td>
+			  					<td><?php echo $row->a_date;?></td>
+			  					<!--<td>-->
 			  						<?php 
-			  							$absent = $this->teacherModel->countAtt($edate,$sdate,$stuID);
-			  							echo $absent['p'];
+			  							//$absent = $this->teacherModel->countAtt($edate,$sdate,$stuID);
+			  							//echo $absent['p'];
 			  						?> 
-			  					</td>
+			  					<!-- </td>
 				  				<td><?php echo $absent['a'];?></td>
-				  				<td><?php echo $absent['l'];?></td>
+				  				<td><?php echo $absent['l'];?></td> -->
 				  				<!-- <td>
 				  					<button data-target=".bs-example-modal-basic1" data-toggle="modal" class="btn btn-blue">
 										View Detail
@@ -360,9 +364,9 @@ class TeacherController extends CI_Controller{
 														<th>S.no.</th>
 														<th>Employee Id</th>
 														<th>Employee Name</th>
-														<th>Present</th>
-														<th>Absent</th>
-														<th>Leave</th>
+														<th>Attendance</th>
+														<th>Date</th>
+													
 													
 													</tr>
 												</thead>
@@ -371,17 +375,20 @@ class TeacherController extends CI_Controller{
 								  			 foreach ($var->result() as $row){	
 								  				?><tr>
 								  					<td><?php echo TeacherController::$sno;?></td>
-								  					<td><?php $stuID = $row->emp_no;  echo $stuID;?></td>
-								  					<?php $empname=$this->singleStudentModel->getteacherName($stuID)->row();?>
+								  					<td><?php $stuID = $row->emp_id;  echo $stuID;?></td>
+								  					<?php $empname=$this->singleStudentModel->getteacherName($stuID);?>
 								  					<td><?php echo $empname->first_name."-".$empname->mid_name."-".$empname->last_name;?></td>
-								  					<td>
+
+								  					<td><?php echo $row->attendance;?></td>
+								  					<td><?php echo $row->a_date?></td>
+								  					<!-- <td> -->
 								  						<?php 
-								  							$absent = $this->teacherModel->countAttTeacher($edate,$sdate,$stuID);
-								  							echo $absent['p'];
+								  							//$absent = $this->teacherModel->countAttTeacher($edate,$sdate,$stuID);
+								  							//echo $absent['p'];
 								  						?> 
-								  					</td>
-									  				<td><?php echo $absent['a'];?></td>
-									  				<td><?php echo $absent['l'];?></td>
+								  					<!-- </td> -->
+									  				<!-- <td><?php echo $absent['a'];?></td>
+									  				<td><?php echo $absent['l'];?></td> -->
 									  				<!-- <td>
 									  					<button data-target=".bs-example-modal-basic1" data-toggle="modal" class="btn btn-blue">
 															View Detail

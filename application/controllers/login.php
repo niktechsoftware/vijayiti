@@ -480,6 +480,7 @@ class Login extends CI_Controller{
 		$data['footerJs'] = 'footerJs/studentAttendanceJs';
 		$data['mainContent'] = 'studentAttendance';
 		$this->load->model("configureClassModel");
+		 $this->load->model('configurefeemodel');
 		$data['request'] = $this->allFormModel->getClass()->result();
 		
 		$this->load->view("includes/mainContent", $data);
@@ -572,6 +573,8 @@ class Login extends CI_Controller{
 		$data['subPage'] = 'Attendance Report';
 		$data['title'] = 'Attendance Report';
 		$this->load->model("configureClassModel");
+		 $this->load->model('configurefeemodel');
+		
 		$data['request'] = $this->allFormModel->getClass()->result();
 		$data['headerCss'] = 'headerCss/newAdmissionCss';
 		$data['footerJs'] = 'footerJs/studentAttendanceJs';

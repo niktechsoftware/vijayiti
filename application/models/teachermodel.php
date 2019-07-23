@@ -14,11 +14,9 @@ class TeacherModel extends CI_Model{
 		return $req;
 	
 	}
-	function getPresenti($section,$classv,$teacherid){
-		$this->db->where("shift",$classv);
-		$this->db->where("unit",$section);
-		$this->db->where("trade",$teacherid);
-		$this->db->where("status","Active");
+	function getPresenti($classv){
+		$this->db->where('class_id',$classv);
+		$this->db->where("status",1);
 		$req = $this->db->get("student_info");
 		return $req;
 	}
@@ -56,14 +54,14 @@ class TeacherModel extends CI_Model{
 	
 	}
 	
-	function checkPresenti($sec,$cla){
-		$this->db->where("class",$cla);
-		$this->db->where("section",$sec);
+	function checkPresenti($cla){
+	$this->db->where("class_id",$cla);
+		//$this->db->where("section",$sec);
 		$this->db->where("a_date",date("Y-m-d"));
 		$query = $this->db->get("attendance");
 		return $query;
 	}
-	function checkPresentia2($sec,$cla){
+	function checkPresentia2($cla){
 		$this->db->where("class",$cla);
 		$this->db->where("section",$sec);
 		$this->db->where("a_date",date("Y-m-d"));
@@ -81,8 +79,9 @@ class TeacherModel extends CI_Model{
 	
 	
 	
-	function getStuReport($edate,$sec,$cla,$sdate){
-		$query = $this->db->query("SELECT DISTINCT stu_id,class FROM attendance WHERE class='$cla' AND section='$sec' AND a_date >= '$sdate' and a_date <='$edate'");
+	function getStuReport($edate,$cla,$sdate){
+		
+		$query = $this->db->query("SELECT * FROM attendance WHERE class_id='$cla' AND a_date >= '$sdate' and a_date <='$edate'");
 		return $query;
 	}
 	
@@ -102,9 +101,9 @@ class TeacherModel extends CI_Model{
 		return $res;
 	}
 	function countAttTeacher($edate,$sdate,$stuID){
-		$resultP = $this->db->query("SELECT attendance FROM teacher_attendance WHERE attendance = 'P' AND emp_no='$stuID' AND a_date >= '$sdate' and a_date <='$edate'");
-		$resultA = $this->db->query("SELECT attendance FROM teacher_attendance WHERE attendance = 'A' AND emp_no='$stuID' AND a_date >= '$sdate' and a_date <='$edate'");
-		$resultL = $this->db->query("SELECT attendance FROM teacher_attendance WHERE attendance = 'L' AND emp_no='$stuID' AND a_date >= '$sdate' and a_date <='$edate'");
+		$resultP = $this->db->query("SELECT attendance FROM teacher_attendance WHERE attendance = 'P' AND emp_id='$stuID' AND a_date >= '$sdate' and a_date <='$edate'");
+		$resultA = $this->db->query("SELECT attendance FROM teacher_attendance WHERE attendance = 'A' AND emp_id='$stuID' AND a_date >= '$sdate' and a_date <='$edate'");
+		$resultL = $this->db->query("SELECT attendance FROM teacher_attendance WHERE attendance = 'L' AND emp_id='$stuID' AND a_date >= '$sdate' and a_date <='$edate'");
 		$p = $resultP->num_rows();
 		$a = $resultA->num_rows();
 		$l = $resultL->num_rows();

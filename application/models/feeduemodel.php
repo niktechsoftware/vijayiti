@@ -15,7 +15,7 @@
 		else{
 		$var = $this->db->insert("feedue",$data);
 		}
-		$this->db->insert("feedue2",$data);
+		// $this->db->insert("feedue2",$data);
 		return $var;
 	}
 	

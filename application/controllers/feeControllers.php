@@ -710,12 +710,12 @@ class feeControllers extends CI_Controller{
 			$studid=$this->input->post("studentId");
 		$feeDueData = array(
 				"student_id" => $this->input->post("studentId"),
-				"student_name" => $this->input->post("studentName"),
-				"total_due" => $this->input->post("remain"),
-				"paid" => $this->input->post("paid"),
-				"remain" => $this->input->post("remain"),
+				//"student_name" => $this->input->post("studentName"),
+				"mbalance" => $this->input->post("remain"),
+				//"paid" => $this->input->post("paid"),
+				//"remain" => $this->input->post("remain"),
 				"description" => $this->input->post("desc"),
-				"ddate" => date("Y-m-d"),
+				"depositedate" => date("Y-m-d"),
 				'invoice_no'=>$invoice_number
 		);
 		$pri =0;

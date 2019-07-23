@@ -1,4 +1,5 @@
-<input type="hidden" name="section" value="<?php echo $sec;?>"/>
+<!-- <input type="hidden" name="section" value="<?php echo $sec;?>"/> -->
+
 		<input type="hidden" name="classv" value="<?php echo $cla;?>"/>
 		<?php $i=1;
 		if($check->num_rows() > 0)
@@ -16,7 +17,7 @@
 				<tr>
 				<td> <?php echo $i;?> </td>
 				<td><input type="hidden" name="stuID<?php echo $i;?>" value="<?php echo $row->enroll_num;?>" /> <?php echo $row->enroll_num;?> </td>
-				<td><input type="hidden" name="schno<?php echo $i;?>" value="<?php echo $row->registration_no;?>"/> <?php echo $row->registration_no;?></td>
+				<!-- <td><input type="hidden" name="schno<?php echo $i;?>" value="<?php echo $row->registration_no;?>"/> <?php echo $row->registration_no;?></td> -->
 														<td> <?php echo $row->name;?></td>
 														
 														<td> <?php echo $row->mobile;?></td>

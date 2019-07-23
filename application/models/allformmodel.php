@@ -24,6 +24,11 @@ class AllFormModel extends CI_Model{
 		$result = $this->db->query("SELECT DISTINCT streem FROM class_info");
 		return $result;
 	}
+
+	function getClassval(){
+		$result = $this->db->query("SELECT * from class_info");
+		return $result;
+	}
 	
 	function getSection(){
 		$result = $this->db->query("SELECT DISTINCT section FROM class_info");

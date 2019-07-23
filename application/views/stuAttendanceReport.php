@@ -34,29 +34,70 @@
 									</div>
 							<div class="panel-body">
 								<div class="col-sm-12">
-									<div class="form-group col-sm-3">
-										<label class="col-sm-3 control-label" for="form-field-20">
-											Class <span class="symbol required"></span>
-										</label>
-										<div class="col-sm-9">
-											<select class="form-control" id="classv" name="class">
-												<?php foreach($request as $row):?>
-													<option value="<?php echo $row->class_name;?>"><?php echo $row->class_name;?></option>
-												<?php endforeach; ?>
-											</select>
-										</div>
-									</div>
-									
-									<div class="form-group col-sm-3"">
-										<label class="col-sm-3 control-label" for="form-field-20">
-											Section<span class="symbol required"></span>
-										</label>
-										<div class="col-sm-9">
-											<select class="form-control" id="sectionId" name="section" >
-											</select>
-										</div>
-									</div>
-									
+									<div class="col-sm-2">
+
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-green">
+                              <h3 class="panel-title">Trade</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="streamListshow" class="form-control">
+                                  <option value="">Select Trade Name</option>
+                                  <?php
+                                          $this->load->model("configurefeemodel");
+                                        $result = $this->configurefeemodel->getStreamList();
+                                        $streamList = $result->result();
+                                        if(isset($streamList)):?>
+                                  <?php foreach ($streamList as $row):?>
+                                  <?php //$this->db->where("school_code",$this->session->userdata("school_code"));
+                                                                    $this->db->where('id',$row->streem);
+                                                          $row1=$this->db->get('stream');
+                                                          if($row1->num_rows()>0){
+                                                              $row2 =$row1->row();
+                                                                    ?>
+
+                                  <option value="<?php echo $row2->id;?>">
+                                    <?php echo $row2->stream;?></option>
+                                  <?php } endforeach; endif;?>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-red">
+                              <h3 class="panel-title">Unit</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="sectionshow" class="form-control">
+
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                         <div class="col-sm-2">
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-purple">
+                              <h3 class="panel-title">Shift</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="classshow" class="form-control">
+
+
+                                </select>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
 									<div class="form-group col-sm-3"">
 										<label class="col-sm-3 control-label" for="form-field-20">
 											Start Date<span class="symbol required"></span>

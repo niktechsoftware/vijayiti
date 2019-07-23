@@ -174,9 +174,12 @@ $tdiscount=0;
                     </tr>
           <tr class='text-uppercase'><?php $this->db->where('id',$classname->section);
           $section=$this->db->get('class_section')->row();
+          $this->db->where('id',$classname->streem);
+          $str=$this->db->get('stream')->row();
+
           ?>
                       <td class="meta-head" style="padding:5px; font-size:12px;">
-            <strong>Class & Section </strong><td style="padding:5px; font-size:12px;"><?php echo $classname->class_name ;?> & <?php echo $section->section ;?> 
+            <strong>Shift & Unit & Trade </strong><td style="padding:5px; font-size:12px;"><?php echo $classname->class_name ;?> & <?php echo $section->section ;?> <?php echo $str->stream;?>
             </td></td>
                     </tr>
                     <tr class='text-uppercase'>
