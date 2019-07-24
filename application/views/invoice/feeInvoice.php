@@ -306,6 +306,11 @@ $monthmk[$i]=13;?>
           <td class="col-sm-8"><b><?php echo "LATE FEE"; ?></b></td>
           <td class="col-sm-3  text-center"><?php echo $lfee=$rowb->late; $i++;?></td>
         </tr>
+         <tr class='text-uppercase'>
+              <td class="col-sm-1 text-center"><b><?php echo $i;?></b></td>
+          <td class="col-sm-8"><b><?php echo "DISCOUNT"; ?></b></td>
+          <td class="col-sm-3  text-center"><?php echo $discount=$discount->discount_rupee; $i++;?></td>
+        </tr>
          <?php  $this->db->where("student_id",$rowb->student_id);
       $this->db->where("invoice_no",$rowb->invoice_no);
       $this->db->where("school_code",$rowb->school_code);

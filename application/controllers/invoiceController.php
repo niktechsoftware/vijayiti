@@ -36,6 +36,10 @@ class InvoiceController extends CI_Controller{
 		
 		$this->db->where("invoice_no",$invoiceNo);
 		$fee_bank_detail = $this->db->get("fee_bank_detail")->row();
+
+		$this->db->where("invoice_number",$invoiceNo);
+		$discount = $this->db->get("dis_den_tab")->row();
+		
 		
 		// $this->db->where("s_no",$studentId);
 		// $fee_shedule = $this->db->get("fee_shedule")->row();
@@ -52,6 +56,7 @@ class InvoiceController extends CI_Controller{
 		
 		$data['rowb'] = $fee_deposit;
 		$data['fee_bank_detail'] = $fee_bank_detail;
+		$data['discount']=$discount;
 		//$data['fee_shedule'] = $fee_shedule;
 		$data['one_time_fee'] = $one_time_fee;
 		$data['isAdmission'] = $isAdmission;

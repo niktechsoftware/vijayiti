@@ -276,7 +276,7 @@ class feeControllers extends CI_Controller{
 					$studd=  $this->db->get("student_info")->row();
 				
 		$discountv = array(
-			"discount_rupee"=>  $this->input->post("discount_start"),
+			"discount_rupee"=>  $this->input->post("discount"),
 			//"discounter_id"=>$studd->discount_id,
 			"invoice_number"=>$invoice_number,
 			"otp"=>5,
@@ -1089,7 +1089,7 @@ class feeControllers extends CI_Controller{
 														//$disc+=$disc1;
 															//endforeach;?>
 															
-														<div class="col-sm-7"> <input type="text" name ="discount_start" id="discount_start" value ="<?php echo $disc;?>" class="form-control"></div>
+														<!--<div class="col-sm-7"> <input type="text" name ="discount_start" id="discount_start" value ="<?php echo $disc;?>" class="form-control"></div>
 	                                                </div>
 												</div> -->
 												<?php } 
@@ -1150,10 +1150,25 @@ $totlatedays = ($years*12*30)+($months*30)+$days;
 														</div>
 	                                                </div>
 	                                            </div>
+
+	                                            	<div class="row space15">
+	                                                <div class="col-sm-12">
+	                                                    <div class="col-sm-5 text-uppercase">Taken Discount</div>
+	                                                    <div class="col-sm-7">
 	                                             <input type='hidden' value='<?= json_encode($month) ;?>' name='arrvalue'>    
 	                                           
 	                                           
 	                                            <?php 
+
+	                                                  $discount='0.00';
+	                                                   
+											  			?> 
+	                                                   
+	                 <input type="text" value="<?php echo $discount; ?>" name ="discount" id="discount" class="form-control" onkeyup="fee();">
+						
+														</div>
+	                                                </div>
+	                                            </div><?php
 	                                            
 	        //                                    $transfee=0;
 	                                          
@@ -1468,25 +1483,51 @@ $totlatedays = ($years*12*30)+($months*30)+$days;
 	
 		$("#latefee2").keyup(function(){
 		    	let fieldValue = parseFloat($(`#latefee2`).val())
+		    	let discountValue = parseFloat($(`#discount`).val())
 		    	if(fieldValue>0){
 		    	    	let total=0;
 		    total = parseFloat($("#tempValue").val())
 		   // alert(total);
-		$("#total").val(total + fieldValue)
-		$("#total1").val(total + fieldValue)
-		$("#paid").val(fieldValue + total)
-		$("#sub_total1").val(fieldValue + total)
-		$("#sub_total").val( fieldValue + total )
+		$("#total").val(total -discountValue + fieldValue)
+		$("#total1").val(total -discountValue + fieldValue)
+		$("#paid").val(fieldValue + total -discountValue)
+		$("#sub_total1").val(fieldValue + total -discountValue)
+		$("#sub_total").val( fieldValue + total -discountValue)
 		    	}else{
 		    	    	let total=0;
 		    total = parseFloat($("#tempValue").val())
 		    //alert(total);
 		    fieldValue=0;
-		$("#total").val(total + fieldValue)
-		$("#total1").val(total + fieldValue)
-	$("#paid").val(fieldValue + total)
-		$("#sub_total1").val(fieldValue + total)
-		$("#sub_total").val( fieldValue + total )
+		$("#total").val(total -discountValue + fieldValue)
+		$("#total1").val(total -discountValue + fieldValue)
+	$("#paid").val(fieldValue -discountValue + total)
+		$("#sub_total1").val(fieldValue + total -discountValue)
+		$("#sub_total").val( fieldValue + total  -discountValue)
+		    	}
+	});
+
+		$("#discount").keyup(function(){
+			let lateValue = parseFloat($(`#latefee2`).val())
+		    	let fieldValue = parseFloat($(`#discount`).val())
+		    	if(fieldValue>0){
+		    	    	let total=0;
+		    total = parseFloat($("#tempValue").val())
+		   // alert(total);
+		$("#total").val(total+lateValue - fieldValue)
+		$("#total1").val(total +lateValue- fieldValue)
+		$("#paid").val(total +lateValue-fieldValue)
+		$("#sub_total1").val(total +lateValue-fieldValue)
+		$("#sub_total").val( total +lateValue-fieldValue )
+		    	}else{
+		    	    	let total=0;
+		    total = parseFloat($("#tempValue").val())
+		    //alert(total);
+		    fieldValue=0;
+		$("#total").val(total+lateValue - fieldValue)
+		$("#total1").val(total+lateValue - fieldValue)
+	$("#paid").val(total+lateValue-fieldValue)
+		$("#sub_total1").val(total+lateValue-fieldValue)
+		$("#sub_total").val(total+lateValue- fieldValue)
 		    	}
 	});
 	

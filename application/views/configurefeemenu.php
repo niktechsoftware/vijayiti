@@ -83,7 +83,24 @@
                       <tbody>
 
 
-                        <?php $ft=4;  $loop  = 12/$mgap ; 
+                        <?php 
+
+
+
+$fsdval=$this->session->userdata('fsd');
+
+$this->db->where('id',$fsdval);
+$fsd_id=$this->db->get('fsd')->row();
+$startdate=$fsd_id->finance_start_date;
+$enddate=$fsd_id->finance_end_date;
+ $tdate=(int)(date('m', strtotime($startdate)));
+
+ $edate=(int)(date('m', strtotime($enddate)));
+
+ 
+
+
+                        $ft=$tdate;  $loop  = 12/$mgap ; 
                         for($j = 1 ; $j<= $loop; $j++)
                           {
 

@@ -1,4 +1,4 @@
-<!-- start: PAGESLIDE LEFT -->
+start: PAGESLIDE LEFT -->
 <a class="closedbar inner hidden-sm hidden-xs" href="#">
 </a>
 <nav id="pageslide-left" class="pageslide inner">
@@ -162,11 +162,11 @@
                 <span class="title">Collect Fee</span>
             </a>
         </li>
-         <li>
+        <!-- <li>
             <a href="<?php echo base_url(); ?>index.php/login/transport">
                 <span class="title">Update Scheduled Fee</span>
             </a>
-        </li>
+        </li>-->
         <li>
             <a href="<?php echo base_url(); ?>index.php/login/feeReport">
                 <span class="title">Fee Report</span>
@@ -179,11 +179,11 @@
             </a>
         </li>
         
-         <li>
+       <!--   <li>
             <a href="<?php echo base_url(); ?>index.php/login/printDeuFee">
                 <span class="title">Print Admission Fee Report</span>
             </a>
-        </li>
+        </li> -->
         
     </ul>
 </li>
@@ -711,4 +711,4 @@
     </div>
 </div>
 </nav>
-<!-- end: PAGESLIDE LEFT -->
+<!-- end: PAGESLIDE LEFT

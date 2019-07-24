@@ -40,7 +40,7 @@
 
 					</div>
 					<div id="msg"></div>
-					<div class="col-md-5">
+				<!--	<div class="col-md-5">
 						<div class="panel">
 							<div class="panel-heading panel-red border-light">
 								<h4 class="panel-title">Fill Detail</h4>
@@ -103,8 +103,8 @@
 							</div>
 						</div>
 
-					</div>
-					<div class="col-md-7">
+					</div>-->
+					<div class="col-md-12">
 						<div class="panel">
 							<div class="panel-heading panel-blue border-light">
 								<h4 class="panel-title">Avaliable Fee Due Detail</h4>
