@@ -237,12 +237,12 @@
    {
 
       $applymethod = $this->input->post("applymethod");
-       $this->db->where('school_code',$this->session->userdata("school_code"));
+      // $this->db->where('school_code',$this->session->userdata("school_code"));
       // $this->db->where('apply_method',$applymethod);
        $this->db->delete('late_fees');
 
       
-       $this->db->where('school_code',$this->session->userdata("school_code"));
+      // $this->db->where('school_code',$this->session->userdata("school_code"));
        $this->db->delete('fee_card_detail');
         $this->db->where('fsd',$this->session->userdata("fsd"));
        $this->db->delete('class_fees');
@@ -274,7 +274,7 @@
         $data['month_number']   =   $this->input->post("month_number");
         $data['deposite_date']  =   $this->input->post("dddate");
         //$data['late_fee']     =   $this->input->post("latefee");
-        $data['school_code']    =   $this->session->userdata("school_code");
+       // $data['school_code']    =   $this->session->userdata("school_code");
         $data['fsd']            =   $this->session->userdata("fsd");
         $data['update_date']    =   date('Y-m-d');
         $this->load->model("configurefeemodel");
@@ -534,7 +534,21 @@
                                                         <td>
                                                             <select class="form-control" id="month<?php echo $i;?>">
                                                                 <?php 
-                                                      $ft=4;  $loop = 12/$mgap; 
+
+
+                                                                 $fsdval=$this->session->userdata('fsd');
+
+                                                $this->db->where('id',$fsdval);
+                                                $fsd_id=$this->db->get('fsd')->row();
+                                                $startdate=$fsd_id->finance_start_date;
+                                                $enddate=$fsd_id->finance_end_date;
+                                                 $tdate=(int)(date('m', strtotime($startdate)));
+
+                                                 $edate=(int)(date('m', strtotime($enddate)));
+
+ 
+                                                 
+                                                      $ft=$tdate;  $loop = 12/$mgap; 
                                                    for($s = 1 ; $s <= $loop; $s++)
                                                  {
                                                      if($ft>12){

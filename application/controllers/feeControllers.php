@@ -654,31 +654,36 @@ class feeControllers extends CI_Controller{
 		$this->load->view("ajax/transport",$data);
 	}
 	function feeReport(){
-		//$data['fsd'] = $this->db->get("general_setting");
-		$fsd = $this->input->post("fsd");
-		$data['fsd']=$fsd;
-		$classv = $this->input->post("classv");
-		$section1 = $this->input->post("section");
 
-		if($classv == "all" && $section1 == "all"){
-		$this->db->where("status","Active");
-		$this->db->where("fsd",$fsd);
-		$data['student'] = $this->db->get("student_info");
-		}else{
-			if($classv != "all" && $section1 == "all"){
-		$this->db->where("status","Active");
-		$this->db->where("fsd",$fsd);
-		$this->db->where("trade",$classv);
-		$data['student'] = $this->db->get("student_info");
-			}else{
-	
-		$this->db->where("status","Active");
-		$this->db->where("fsd",$fsd);
-		$this->db->where("trade",$classv);
-		$this->db->where("unit",$section1);
-		$data['student'] = $this->db->get("student_info");
-			}}
+		 $cls=$this->input->post('classid');
+		   $data['fsd'] = $this->input->post("fsd");
+	    	$data['cla'] = $this->input->post("classid");
 		$this->load->view("ajax/feeReport",$data);
+		//$data['fsd'] = $this->db->get("general_setting");
+		// $fsd = $this->input->post("fsd");
+		// $data['fsd']=$fsd;
+		// $classv = $this->input->post("classv");
+		// $section1 = $this->input->post("section");
+
+		// if($classv == "all" && $section1 == "all"){
+		// $this->db->where("status","Active");
+		// $this->db->where("fsd",$fsd);
+		// $data['student'] = $this->db->get("student_info");
+		// }else{
+		// 	if($classv != "all" && $section1 == "all"){
+		// $this->db->where("status","Active");
+		// $this->db->where("fsd",$fsd);
+		// $this->db->where("trade",$classv);
+		// $data['student'] = $this->db->get("student_info");
+		// 	}else{
+	
+		// $this->db->where("status","Active");
+		// $this->db->where("fsd",$fsd);
+		// $this->db->where("trade",$classv);
+		// $this->db->where("unit",$section1);
+		// $data['student'] = $this->db->get("student_info");
+		// 	}}
+		//$this->load->view("ajax/feeReport",$data);
 	}
 				  			
 		function fullDetail(){

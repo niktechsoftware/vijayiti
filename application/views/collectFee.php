@@ -450,3 +450,20 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+        
+var input = document.getElementById("findclass");
+                         input.addEventListener("keyup", function () {
+                               var findclass = document.getElementById("findclass").value;
+                  
+      //alert(text_value);
+               $.post("<?php echo site_url('index.php/configureClassControllers/findclass') ?>", {findclass : findclass}, function(data){
+            $("#classfindDetail").html(data);
+                //alert(data);
+        });
+         });</script>
+        
+          
+        

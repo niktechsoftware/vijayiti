@@ -222,7 +222,7 @@ class ConfigureFeeModel extends CI_Model{
 	function save_fee_deposit($data,$month_number,$dd){
 		$this->db->where("month_number",$month_number);
 		//$this->db->where("month_name",$month_name);
-		$this->db->where("school_code",$this->session->userdata('school_code'));
+		//$this->db->where("school_code",$this->session->userdata('school_code'));
 		
 		$result = $this->db->get("fee_card_detail");
 		if($result->num_rows()>0){

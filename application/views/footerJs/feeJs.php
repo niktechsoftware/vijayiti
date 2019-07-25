@@ -107,6 +107,48 @@
 						$("#rahul").html(data);
 					});
 				});
+
+				 $("#streamListshow").change(function(){
+    	            var streamid = $("#streamListshow").val();
+    	        
+    	          // alert(streamid);
+    	            $.post("<?php echo site_url('configureClassControllers/getSectionbyStream') ?>", {streamid : streamid}, function(data){
+    	            	// alert(data);
+    	                $("#sectionshow").html(data);
+
+    	               
+    	    		});
+    	        });
+
+          $("#sectionshow").change(function(){
+        			
+     	            var sectionid = $("#sectionshow").val();
+     	             var streamid = $("#streamListshow").val();
+     	           // alert(sectionid);
+     	             // alert(streamid);
+     	            $.post("<?php echo site_url('configureClassControllers/getclass') ?>", {sectionid : sectionid,streamid:streamid}, function(data){
+     	            	//alert(data);
+     	                $("#classshow").html(data);
+     	                //  alert(data);
+     	    		});
+     	        });
+
+           $("#classshow").change(function(){
+    	            var classid = $("#classshow").val();
+    	            var fsd = $("#fsd").val();
+    	           // var streamid = $("#streamListshow").val();
+    	          //  var sectionid = $("#sectionshow").val();
+    	          //alert(classid);
+    	        
+    	      $.post("<?php echo site_url('feeControllers/feeReport') ?>",{classid : classid, fsd:fsd}, function(data){
+    	       //alert(data);
+    	              $("#rahul").html(data);
+    	               
+    	    	    });
+    	        });
+
+
+
 				
 				Main.init();
 				SVExamples.init();

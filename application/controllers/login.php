@@ -430,6 +430,7 @@ class Login extends CI_Controller{
 		$data['mainPage'] = 'Fee';
 		$data['subPage'] = 'Fee Report';
 		$this->load->model("configureClassModel");
+		 $this->load->model('configurefeemodel');
 		$data['request'] = $this->allFormModel->getClass()->result();
 		
 		$data['title'] = 'Fee Report';

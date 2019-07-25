@@ -37,9 +37,12 @@
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
-					<?php 
-						$detail = $this->db->query("SELECT finance_start_date FROM `fee_deposit` GROUP BY finance_start_date");
-						if($detail->num_rows() > 0){
+				<?php 
+						$detail = $this->db->query("SELECT * FROM fsd Order BY id");
+						//$detail1 = $this->db->query("SELECT finance_start_date FROM `old_fee_deposit` where school_code='$school_code' GROUP BY finance_start_date ");
+						// if(($detail->num_rows() > 0)||($detail1->num_rows() > 0))
+						if(($detail->num_rows() > 0)){
+							
 					?>
 					<label class="col-sm-1 control-label">
 						Finance Start Date <span class="symbol required"></span>
@@ -47,33 +50,87 @@
 					<div class="col-sm-2">
 						<select class="form-control" id="fsd" name = "fsd" style="width: 150px;">
 							<option value="">-select FSD-</option>
-		                      			<?php foreach($detail->result() as $row):?>
-		                      				<option value="<?php echo $row->finance_start_date;?>">
-		                      					<?php echo date("d-M-y", strtotime($row->finance_start_date));?>
-		                      				</option>
-		                      			<?php endforeach;?>
+		                      			<?php 
+		                      			
+		                      			if(($detail->num_rows() > 0)){
+		                      			foreach($detail->result() as $row):?>
+		                      				
+		                      			<option value="<?php echo $row->id;?>">
+		                      			<?php echo date("d-M-y", strtotime($row->finance_start_date));?>
+		                      		</option>
+		                      		<?php endforeach;
+		                      				
+		                      			}
+		                      			?>
 						</select>
 					</div>
 					<?php } ?>
-					<label class="col-sm-1 control-label">
-						Class <span class="symbol required"></span>
-					</label>
-					<div class="col-sm-2">
-						<select class="form-control" id="classv" name="class" style="width: 150px;">
-							<option value="">-Select Class-</option>
-							<?php foreach($request as $row):?>
-							<option value="<?php echo $row->streem;?>"><?php echo $row->streem;?></option>
-							<?php endforeach; ?>
-							<option value="all">All Class</option>
-						</select>
-					</div>
-					<label class="col-sm-1 control-label">
-						Section<span class="symbol required"></span>
-					</label>
+
+				 <div class="col-sm-3">
+
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-green">
+                              <h3 class="panel-title">Trade</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="streamListshow" class="form-control">
+                                  <option value="">Select Trade Name</option>
+                                  <?php
+                                          $this->load->model("configurefeemodel");
+                                        $result = $this->configurefeemodel->getStreamList();
+                                        $streamList = $result->result();
+                                        if(isset($streamList)):?>
+                                  <?php foreach ($streamList as $row):?>
+                                  <?php //$this->db->where("school_code",$this->session->userdata("school_code"));
+                                                                    $this->db->where('id',$row->streem);
+                                                          $row1=$this->db->get('stream');
+                                                          if($row1->num_rows()>0){
+                                                              $row2 =$row1->row();
+                                                                    ?>
+
+                                  <option value="<?php echo $row2->id;?>">
+                                    <?php echo $row2->stream;?></option>
+                                  <?php } endforeach; endif;?>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                         <div class="col-sm-3">
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-red">
+                              <h3 class="panel-title">Unit</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="sectionshow" class="form-control">
+
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                         <div class="col-sm-3">
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-purple">
+                              <h3 class="panel-title">Shift</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <select id="classshow" class="form-control">
+
+
+                                </select>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
 					
-					<div class="col-sm-3"  >
-						<select class="form-control" id="sectionId" name="section"></select>
-					</div>
 				</div>
 				<div class="col-sm-12">				
 					<div class="table-responsive" id="rahul"></div><!-- end: table-responsive -->
