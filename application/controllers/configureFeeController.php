@@ -389,12 +389,12 @@
  
                                                  ?>
                                                         <?php 
-                                                 $ft=$tdate;  $loop = 12/$mgap; 
+                                                 $ft=$tdate;  $loop = 24/$mgap; 
 
                                              for($j = 1 ; $j<= $loop; $j++)
                                              {
-                                                if($ft>12){
-                                                 $ft=$ft-12;}
+                                                if($ft>24){
+                                                 $ft=$ft-24;}
                                                 $month_name = date("F",mktime(0,0,0,$ft,1,date("Y")));?>
                                                         <option value="<?php echo $ft; ?>"><?php echo  $month_name;?>
                                                         </option>
@@ -548,11 +548,11 @@
 
  
                                                  
-                                                      $ft=$tdate;  $loop = 12/$mgap; 
+                                                      $ft=$tdate;  $loop = 24/$mgap; 
                                                    for($s = 1 ; $s <= $loop; $s++)
                                                  {
-                                                     if($ft>12){
-                                                      $ft=$ft-12;}        
+                                                     if($ft>24){
+                                                      $ft=$ft-24;}        
                                         $month_name = date("F",mktime(0,0,0,$ft,1,date("Y"))); ?>
                                                                 <option value="<?php echo $ft; ?>"
                                                                     <?php if($ft == $row->taken_month): echo ' selected="selected"'; endif; ?>>

@@ -36,19 +36,25 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				<div class="form-group">
-				<?php 
+				
+				
+
+
+				 <div class="col-sm-3">
+				 	<?php 
 						$detail = $this->db->query("SELECT * FROM fsd Order BY id");
-						//$detail1 = $this->db->query("SELECT finance_start_date FROM `old_fee_deposit` where school_code='$school_code' GROUP BY finance_start_date ");
-						// if(($detail->num_rows() > 0)||($detail1->num_rows() > 0))
+						
 						if(($detail->num_rows() > 0)){
 							
 					?>
-					<label class="col-sm-1 control-label">
-						Finance Start Date <span class="symbol required"></span>
-					</label>
-					<div class="col-sm-2">
-						<select class="form-control" id="fsd" name = "fsd" style="width: 150px;">
+
+                          <div class="panel">
+                            <div class="panel-heading btn-dark-blue">
+                              <h3 class="panel-title">Finance Start Date</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="form-group">
+                               <select class="form-control" id="fsd" name = "fsd">
 							<option value="">-select FSD-</option>
 		                      			<?php 
 		                      			
@@ -63,8 +69,11 @@
 		                      			}
 		                      			?>
 						</select>
-					</div>
-					<?php } ?>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div><?php } ?>
 
 				 <div class="col-sm-3">
 

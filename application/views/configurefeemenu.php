@@ -100,7 +100,7 @@ $enddate=$fsd_id->finance_end_date;
  
 
 
-                        $ft=$tdate;  $loop  = 12/$mgap ; 
+                        $ft=$tdate;  $loop  = 24/$mgap ; 
                         for($j = 1 ; $j<= $loop; $j++)
                           {
 
@@ -111,8 +111,8 @@ $enddate=$fsd_id->finance_end_date;
 
                             <td><?php echo $j;?></td>
                             <?php
-                                if($ft>12){
-                                 $ft=$ft-12;}
+                                if($ft>24){
+                                 $ft=$ft-24;}
                                  $month_name = date("F",mktime(0,0,0,$ft,1,date("Y")));
                                   $result =  $this->configurefeemodel->check_fee_deposit($ft);
 

@@ -290,7 +290,7 @@
 												                                           ?>
 												                                            <div class="progress-bar <?php echo $color[$i];?>" style="width: 8.33%">
 												                                            <?php
-												                                            $deposite_month =$mdf->deposite_month-4;
+												                                            $deposite_month =$mdf->deposite_month;
 												                                            $rdt =date('Y-m-d', strtotime("$deposite_month months", strtotime($fsddate)));
 												                                            //$rdt = "01-".$fd->month_number."-2019";
 												                                            echo date("M-y",strtotime("$rdt"));
@@ -301,7 +301,7 @@
 												                                           
 												                                      if($apm1->num_rows()>0){
 												                                          $apm =$apm1->row()->apply_method;
-												                                          $h=0; $pm=12/$apm;
+												                                          $h=0; $pm=24/$apm;
 												                                          for($j=1;$j<$pm+1;$j++){?>
 
 												                                      
@@ -310,7 +310,21 @@
 												                                    </div>
 												                                </div>
 												                            </div>
+												                            <?php
 
+															       	$fsdval=$this->session->userdata('fsd');
+
+																	$this->db->where('id',$fsdval);
+																	$fsd_id=$this->db->get('fsd')->row();
+																	$startdate=$fsd_id->finance_start_date;
+																	$enddate=$fsd_id->finance_end_date;
+																	 $tdate=(int)(date('m', strtotime($startdate)));
+
+																	 $endate=(int)(date('m', strtotime($enddate)));
+
+						
+
+												                            ?>
 												                            <div class="row space20">
 												                                <div class="col-sm-12">
 												                                    <select multiple="multiple" id="form-field-select-2" name="diposit_month[]" class="form-control search-select" required="required">
@@ -331,7 +345,7 @@
                                                                                 		   $monthDe=$monthDeposit1->num_rows();
                                                                                 		   //foreach($monthDeposit1->result() as $mdf1):
                                                                                 		    $apm =$apm1->row()->apply_method;
-													                                              $h=0; $pm=12/$apm;
+													                                              $h=0; $pm=24/$apm;
                                                                                 		   for($j=1;$j<$pm+1;$j++){
                                                                                             if($j > $monthDeposit->num_rows()){
 												                                           ?>
@@ -341,7 +355,7 @@
 												                                            $rdt =date('Y-m-d', strtotime("$h months", strtotime($fsddate)));
 												                                          ?>
 													                                     
-													                                            <option value="<?php if(($h+4)>12){echo $h+4-12;}else{ echo $h+4;}?>">
+													                                            <option value="<?php if(($h+$tdate)>12){echo $h+$tdate-24;}else{ echo $h+$tdate;}?>">
 													                                                <?php echo date("M-Y",strtotime($rdt));?>
 													                                            </option>
 													                                            
@@ -350,13 +364,13 @@
 													                                      }else{
 																							if($apm1->num_rows()>0){
 																								$apm =$apm1->row()->apply_method;
-																								$h=0; $pm=12/$apm;
+																								$h=0; $pm=24/$apm;
 																								for($j=1;$j<$pm+1;$j++){
 
 																									$rdt = date('Y-m-d', strtotime("$h months", strtotime($fsddate)));
-																									$ft=$h+4;
-																									if($ft>12){
-											                                                     $ft=$ft-12;}?>
+																									$ft=$h+$tdate;
+																									if($ft>24){
+											                                                     $ft=$ft-24;}?>
 																									<option value="<?php echo $ft;?>">
 																									<?php echo date("M-Y",strtotime($rdt));?>
 																									</option>

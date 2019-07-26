@@ -506,7 +506,7 @@ $enddate=$fsd_id->finance_end_date;
 							$enddate=$fsd_id->finance_end_date;
 							 $tdate=(int)(date('m', strtotime($startdate)));
 
-							 $edate=(int)(date('m', strtotime($enddate)));
+							 $endate=(int)(date('m', strtotime($enddate)));
 
 						
 								//$this->db->where("school_code",$this->session->userdata("school_code"));
@@ -520,13 +520,13 @@ $enddate=$fsd_id->finance_end_date;
 								<span class="label label-success" style="line-height:20px;">
 								<?php 
 							 if($fd->deposite_month<$tdate){
-								$realm=  $fd->deposite_month-$tdate+12;
+								$realm=  $fd->deposite_month-$tdate+24;
 					
 							}else{
 							 $realm= $fd->deposite_month-$tdate;
 							}
 							//	$realm = $fd->deposite_month-4;
-								echo date('M-Y', strtotime("$realm months", strtotime($fdate)));
+								echo date('M-Y', strtotime("$realm months", strtotime($startdate)));
 								//echo date("d-M-y",strtotime("$rdt1"));?>
 								 </span>
 									
@@ -566,12 +566,16 @@ $enddate=$fsd_id->finance_end_date;
             						$mbk=0;
 								 	$this->db->where('invoice_no',$total->invoice_no); 
 								 	$this->db->where('student_id',$stu_id);
+								 	 $this->db->order_by('id',"desc")->limit(1);
                                   	$mbalance=$this->db->get('feedue');
+                                  	// $mbalance = $this->db->query("SELECT * FROM feedue where invoice_no='$total->invoice_no' AND student_id='$stu_id'  ORDER BY id DESC LIMIT 1");
+                                  	//print_r($mbalance);exit;
+
 								 	//print_r($mbalance->mbalance);
 								 	if($mbalance->num_rows()>0){
 								 	if(strlen($mbalance->row()->mbalance) > 0){
 								 	    $db=$mbalance->row()->mbalance;
-									echo	$mbk= "Previous Balance ".$db."<br>";
+									echo $mbk= "Previous Balance ".$db."<br>";
 										?><input type = "hidden" id="amt1<?php echo $count;?>" value="<?php echo $mbalance->row()->mbalance;?>"/><?php
 									}}
 									$cdate = date("Y-m-d");
@@ -596,7 +600,7 @@ $enddate=$fsd_id->finance_end_date;
 										$searchM[]=0;	$rt=0;$month="";	
 											foreach($fcd->result() as $fcg):
 											if($fcg->month_number<$tdate){
-												$roldm=$fcg->month_number-$tdate+12;
+												$roldm=$fcg->month_number-$tdate+24;
 											}
 											else{
 												$roldm=$fcg->month_number-$tdate;
@@ -647,7 +651,7 @@ $enddate=$fsd_id->finance_end_date;
 									$month="";
 								foreach($fcd->result() as $fcg):
 									if($fcg->month_number<$tdate){
-										$roldm=$fcg->month_number-$tdate+12;
+										$roldm=$fcg->month_number-$tdate+24;
 									}else{
 									$roldm=$fcg->month_number-$tdate;
 									}	$oldm =  date('Y-m', strtotime("$roldm months", strtotime($fdate)));
