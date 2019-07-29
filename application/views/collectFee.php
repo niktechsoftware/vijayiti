@@ -290,7 +290,7 @@
 												                                           ?>
 												                                            <div class="progress-bar <?php echo $color[$i];?>" style="width: 8.33%">
 												                                            <?php
-												                                            $deposite_month =$mdf->deposite_month;
+												                                            $deposite_month =$mdf->deposite_month-24;
 												                                            $rdt =date('Y-m-d', strtotime("$deposite_month months", strtotime($fsddate)));
 												                                            //$rdt = "01-".$fd->month_number."-2019";
 												                                            echo date("M-y",strtotime("$rdt"));
@@ -352,10 +352,12 @@
 												                                            <div class="progress-bar <?php echo $color[$i];?>" style="width: 8.33%">
 												                                            <?php
 												                                            //$deposite_month1 =$mdf1->taken_month-4;
-												                                            $rdt =date('Y-m-d', strtotime("$h months", strtotime($fsddate)));
+																							$rdt =date('Y-m-d', strtotime("$h months", strtotime($fsddate)));
+																							$value=$h+$tdate;
+
 												                                          ?>
 													                                     
-													                                            <option value="<?php if(($h+$tdate)>12){echo $h+$tdate-24;}else{ echo $h+$tdate;}?>">
+													                                            <option value="<?php if(($value)>24){echo $value-12;}else{ echo $value;}?>">
 													                                                <?php echo date("M-Y",strtotime($rdt));?>
 													                                            </option>
 													                                            
@@ -370,8 +372,13 @@
 																									$rdt = date('Y-m-d', strtotime("$h months", strtotime($fsddate)));
 																									$ft=$h+$tdate;
 																									if($ft>24){
-											                                                     $ft=$ft-24;}?>
-																									<option value="<?php echo $ft;?>">
+																								 $ft1=$ft-12;}
+																								 else{
+																									 $ft1=$ft;
+																								 }
+																								 
+																								 ?>
+																									<option value="<?php echo $ft1;?>">
 																									<?php echo date("M-Y",strtotime($rdt));?>
 																									</option>
 																						            <?php

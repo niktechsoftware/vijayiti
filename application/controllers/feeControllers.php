@@ -354,7 +354,7 @@ class feeControllers extends CI_Controller{
 					$fsd1=$this->db->get('fsd')->row();
 					$demont = $rty->num_rows();
                    $i=0;$printMonth=""; foreach($rty->result() as $tyu):
-                        $ffffu= $tyu->deposite_month-4;
+                        $ffffu= $tyu->deposite_month;
 					
 						$printMonth= $printMonth."".date('M-Y', strtotime("$ffffu months", strtotime($fsd1->finance_start_date))).", ";
 						$monthmk[$i]=$tyu->deposite_month;
@@ -978,7 +978,7 @@ class feeControllers extends CI_Controller{
 		   $stuid =  $this->input->post("stuId");
 		   $scatid =  $this->input->post("catId");
 		   $fsdid =  $this->input->post("fsdid");
-		 //print_r($month);
+		 print_r($month);
 		 //exit;
 		   //$this->feeModel->getperfeerecord($stuid);
 		 
