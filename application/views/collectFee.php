@@ -60,16 +60,14 @@
 						                      </div>
 						                </div>	
 									</div>
-									<div class="col-sm-7" id="getFsd">
-											
-									</div>
+									<div class="col-sm-7" id="getFsd"></div>
 									
 								</div>
 							</form>
 							
 				                <div class="panel-body">
 									<?php
-								//	echo $stud_id;}
+								
 									if($stud_id!='0'){
 									$pk=$totdata;
 									//$pk->student_info.id;

@@ -5,7 +5,10 @@
 			<!-- start: FORM WIZARD PANEL -->
 			<div class="panel panel-white">
 				<div class="panel-heading panel-yellow">
-					<h4 class="panel-title">Student  <span class="text-bold">Information</span></h4>
+				<h4 class="panel-title">Student  <span class="text-bold">Registration</span>
+						<a class="btn btn-danger" href="#">Quick Registration</a>
+                    </h4>
+					
 					<div class="panel-tools">
 						<div class="dropdown">
 							<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
@@ -198,9 +201,7 @@
 										<input type="text" class="form-control" id="mother_name" name="mother_name">
 									</div>
 								</div>
-							</div>
-							<div class="row">
-									<div class="col-md-3">
+								<div class="col-md-3">
 										<div class="form-group">
 											<label class="control-label">
 												Father Name <span class="symbol required"></span>
@@ -208,6 +209,10 @@
 											<input type="text"  class="form-control" id="fatherName" name="fatherName" />
 										</div>
 									</div>
+							</div>
+							<div class="row">
+									
+									
 									<div class="col-md-3">
 											<div class="form-group">
 												<label class="control-label">
@@ -234,9 +239,38 @@
 											<input type="password"  class="form-control" onkeyup='check();' id="password_again" name="password_again" />
 										</div>
 									</div>
+									<?php 
+						$detail = $this->db->query("SELECT * FROM fsd Order BY id");
+						
+						if(($detail->num_rows() > 0)){
+							
+					?>
+								<div class="col-md-3">
+										<div class="form-group">
+											<label class="control-label text-uppercase">
+												Fsd <span id="fsd" Style="color:red;" class="symbol required"></span>
+											</label>
+											<select class="form-control" id="fsd" name = "fsd">
+							<option value="">-select FSD-</option>
+		                      			<?php 
+		                      			
+		                      			if(($detail->num_rows() > 0)){
+		                      			foreach($detail->result() as $row):?>
+		                      				
+		                      			<option value="<?php echo $row->id;?>">
+		                      			<?php echo date("d-M-y", strtotime($row->finance_start_date));?>
+		                      		</option>
+		                      		<?php endforeach;
+		                      				
+		                      			}
+		                      			?>
+						</select>
+										</div>
+									</div>
+									
 								</div>
 							</div>
-						</div>
+						</div><?php } ?>
 				</div>
 			</div>
 		</div>

@@ -49,21 +49,61 @@
 		<script src="<?php echo base_url(); ?>assets/js/main.js"></script>
 		<!-- end: CORE JAVASCRIPTS  -->
 		<script>
-	
+	$(document).ready(function() {
+    $('#feeduelist').DataTable();
+} );
 			jQuery(document).ready(function() {
 
-				$("#studentId").keyup(function(){
-					var studentId = $("#studentId").val();
-					//alert("itemNo");
-					$.post("<?php echo site_url("index.php/feeControllers/checkDetails") ?>",{studentId : studentId}, function(data){
+				$("#studusername").keyup(function(){
+					var studentusername = $("#studusername").val();
+					//alert(studentusername);
+					$.post("<?php echo site_url("index.php/feeControllers/checkDetails") ?>",{studentusername : studentusername}, function(data){
 						var d = jQuery.parseJSON(data);
 						
 						$("#msg").html(d.msg);
+						$("#studentId").val(d.studentId);
+						//var stuid = d.studentId);
+					//alert(stuid);
 						$("#studentName").val(d.studentName);
 						$("#totdue").val(d.totdue);
 					});
 					
 				});
+				
+				$("#classv").change(function(){
+					var sectionid = $("#classv").val();
+					//alert(teacherid);
+				
+						$('#sectionId').prop('disabled', false);
+						$.post("<?php echo site_url("index.php/teacherController/getClassbySectionfeeReport") ?>",{sectionid : sectionid}, function(data){
+							$("#sectionId").html(data);
+						});
+				});
+				
+				$("#sectionId").change(function(){
+					var fsd = $("#fsd").val();
+					var classid = $("#sectionId").val();
+					//var sectionid = $("#classv").val();
+					//alert(classid);
+					$.ajax({
+						"url": "<?= base_url() ?>index.php/feepanel/classDue",
+						"method": 'POST',
+						"data": {fsd : fsd,classid : classid,},
+						beforeSend: function(data) {
+							$("#rahul").html("<center><img src='<?= base_url()?>assets/images/loading.gif' /></center>")
+						},
+						success: function(data) {
+							$("#rahul").html(data);
+						},
+						error: function(data) {
+							$("#rahul").html(data)
+						}
+					})
+					
+				});
+				
+				
+				
 				$('input#paid').keyup(function(){
 							var name = $('#paid').val();
 							var totdue = $('#totdue').val();
@@ -78,6 +118,13 @@
 				
 				
 				});
+
+				function stuBirthPlace() {
+                    var text_value = document.getElementById("studusername").value;
+                    value = text_value.replace(/[ ]+/g," ").replace(/[^(A-Za-z0-9 )]*/g, "");
+                    document.getElementById("studusername").value=value;
+
+                };
 
 			
 		</script>

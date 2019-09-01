@@ -144,8 +144,7 @@ class feeControllers extends CI_Controller{
 	}
 
 	function getFsd(){
-		//$school_code=$this->session->userdata('school_code');
-		//$this->db->where('school_code',$school_code);
+	
 		$fsd1 = $this->db->get("general_settings")->row()->fsd_id;
 		//echo $fsd1;
 		$stud_id=$this->input->post("studentid");
@@ -157,7 +156,7 @@ class feeControllers extends CI_Controller{
 		{
 				$this->db->where('id',$fsd1); 
 				$start_date=$this->db->get('fsd')->row()->finance_start_date;
-							?>	<div class="form-group">
+					?>	<div class="form-group">
 				                      <label for="inputStandard" class="col-lg-3 control-label">
 				                      		Select FSD <span style="color:#F00">*</span>
 				                      </label>
@@ -170,7 +169,7 @@ class feeControllers extends CI_Controller{
 										 <button  class="btn btn-dark-green">Get Record <i class="fa fa-arrow-circle-right"></i></button>
 									</div>
 								</div>
-	<?php	}else{?>
+	<?php }	else{ ?>
 			<div class="alert alert-block alert-danger fade in">
 				<button data-dismiss="alert" class="close" type="button">
 					&times;
@@ -1539,4 +1538,4 @@ $totlatedays = ($years*12*30)+($months*30)+$days;
 	</script>                   
 	<?php 	}
 }?>
-	}
+	

@@ -6,6 +6,34 @@ class newAdmissionControllers extends CI_Controller{
              $s_no = $this->db->query("SELECT s_no From student_info order by s_no DESC Limit 1")->row()->s_no;
              $nm=2000+$s_no;
 		$enroll_number="STUD".$nm;
+		
+		$this->db->select_max('s_no');
+		$query = $this->db->get('student_info');
+		if($query->num_rows()>0){
+			$sno1=$query->row()->s_no;
+			$sno1+=1;
+		}else{
+			$sno=1;
+		}
+		$str="R";
+		$fsdid =$this->input->post("fsd");
+		$this->db->where("id",$fsdid);
+		$getdatefsd=$this->db->get("fsd")->row();
+		$year = date('Y',strtotime($getdatefsd->finance_start_date));
+		echo $this->input->post('classshow');
+		$this->db->where("id",$this->input->post('classshow'));
+		$trade = $this->db->get("class_info")->row();
+	if($trade->streem==1){
+		$str="E";
+	}	
+	if($trade->streem==2){
+		$str="F";
+	}	
+	if($trade->streem==3){
+		$str="I";
+	}
+	$enroll_number=$str.$year.$sno1;
+		
 $datastudent = array(
 				"enroll_num" => $enroll_number,
 				"name" => $this->input->post("name"),
@@ -43,7 +71,7 @@ $datastudent = array(
 				"cast_certificate"		=>"castCertificate.png",
 				"stud_sign"				=>"tc.png",
 				"stud_image"			=>"cc.png",
-				"fsd"				=>$this->session->userdata("fsd"),
+				"fsd"				=>$this->input->post("fsd"),
 				"class_id"=>$this->input->post('classshow'),
 				
 		);

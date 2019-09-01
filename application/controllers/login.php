@@ -286,13 +286,30 @@ class Login extends CI_Controller{
 		$this->load->view("includes/mainContent", $data);
 	}
 	
+	function quickRegistraionStudent(){
+		$data['pageTitle'] = 'Student Section';
+		$data['smallTitle'] = 'Quick Admission';
+		$data['mainPage'] = 'Students';
+		$data['subPage'] = 'Quick Admission';
+		$this->load->model("allFormModel");
+		$this->load->model('configurefeemodel');
+		$data['className'] = $this->allFormModel->getClass()->result();
+		
+		$data['title'] = 'Quick Admission';
+		$data['headerCss'] = 'headerCss/newAdmissionCss';
+		$data['footerJs'] = 'footerJs/newAdmission';
+		$data['mainContent'] = 'quickRegistration';
+		$this->load->view("includes/mainContent", $data);
+	
+	}
+	
 	function newAdmission(){
 		$data['pageTitle'] = 'Student Section';
 		$data['smallTitle'] = 'New Admission';
 		$data['mainPage'] = 'Students';
 		$data['subPage'] = 'New Admission';
 		$this->load->model("allFormModel");
-			$this->load->model('configurefeemodel');
+		$this->load->model('configurefeemodel');
 		
 		$data['className'] = $this->allFormModel->getClass()->result();
 		$data['title'] = 'New Admission';
@@ -466,6 +483,21 @@ class Login extends CI_Controller{
 		$data['headerCss'] = 'headerCss/stockCss';
 		$data['footerJs'] = 'footerJs/feedueJs';
 		$data['mainContent'] = 'feedue';
+		$this->load->view("includes/mainContent", $data);
+	}
+	
+	function feeduefee(){
+		$data['pageTitle'] = 'Fee Due Details';
+		$data['smallTitle'] = 'Fee Details';
+		$data['mainPage'] = 'Fee due Details';
+		$data['subPage'] = 'Fee Details';
+		$this->load->model("feeduemodel");
+		$var= $this->feeduemodel->getDueDetail();
+		$data['request']=$var->result();
+		$data['title'] = 'Enter Stock';
+		$data['headerCss'] = 'headerCss/stockCss';
+		$data['footerJs'] = 'footerJs/feedueJs';
+		$data['mainContent'] = 'feeduefee';
 		$this->load->view("includes/mainContent", $data);
 	}
 	

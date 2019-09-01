@@ -178,6 +178,12 @@ start: PAGESLIDE LEFT -->
                 <span class="title">Admission Fee Report</span>
             </a>
         </li>
+          <li>
+            <a href="<?php echo base_url(); ?>index.php/login/feeduefee">
+                <span class="title">Mraksheet Due Fee Report</span>
+            </a>
+        </li>
+        
         
        <!--   <li>
             <a href="<?php echo base_url(); ?>index.php/login/printDeuFee">
